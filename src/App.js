@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { 
+  BrowserRouter, 
+  Route, 
+  Switch } from 'react-router-dom';
 import './App.css';
+import Login from './Login.js';
+import GameBoard from './GameBoard.js';
+import UserBoards from './UserBoards.js';
+import AboutUs from './AboutUs.js';
+import Landing from './Landing.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  render() {
+    return (
+      <div>
+        <BrowserRouter>
+          <h1>UserInfo</h1>
+          <Switch>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/gameboard" component={GameBoard} />
+            <Route exact path="/userboards" component={UserBoards} />
+            <Route exact path="/aboutus" component={AboutUs} />
+            <Route exact path="/" component={Landing} />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    )
+  }
 }
-
-export default App;
