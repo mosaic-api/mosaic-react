@@ -21,8 +21,8 @@ export default class GameBoard extends Component {
         console.log(rowNodes)
         return (
             <div>
-                <h2>Mosaic</h2>
-                <div id="gamebaord-container">
+                <h2 className="title">Mosaic</h2>
+                <div id="gameboard-container">
                     {rowNodes}
                 </div>
                 <div id="tile-preview">preview</div>
