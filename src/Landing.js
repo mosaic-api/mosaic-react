@@ -6,10 +6,12 @@ import ColorLensIcon from '@material-ui/icons/ColorLens';
 export default class Landing extends Component {
     render() {
         return (
-            <div>
+            <div id="landing-container">
                 <h1>Mosaic</h1>
-                <Button variant="contained" color="primary" startIcon={<PlayCircleFilledIcon/>}>Play</Button>
-                <Button variant="contained" color="secondary" startIcon={<ColorLensIcon />}>Color Switch</Button>
+                <div className="button-container">
+                    <Button variant="contained" color="primary" size="large" startIcon={<PlayCircleFilledIcon />}>Play</Button>
+                    <Button variant="contained" color="secondary" size="small" startIcon={<ColorLensIcon />}>Color Switch</Button>
+                </div>
             </div>
         )
     }

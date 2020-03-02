@@ -9,13 +9,16 @@ import GameBoard from './GameBoard.js';
 import UserBoards from './UserBoards.js';
 import AboutUs from './AboutUs.js';
 import Landing from './Landing.js';
+import TopDrawer from './TopDrawer.js';
 
 export default class App extends Component {
+
+  
   render() {
     return (
       <div>
         <BrowserRouter>
-          <h1>UserInfo</h1>
+          <TopDrawer></TopDrawer>
           <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/gameboard" component={GameBoard} />
