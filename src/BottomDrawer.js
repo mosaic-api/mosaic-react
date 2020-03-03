@@ -13,7 +13,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SwipeableTemporaryDrawer() {
+export default function SwipeableTemporaryDrawer({handleChangeScheme}) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -32,10 +32,16 @@ export default function SwipeableTemporaryDrawer() {
 
   const fullList = side => (
     <div className={classes.fullList} role="presentation" onClick={toggleDrawer(side, false)} onKeyDown={toggleDrawer(side, false)}>
-          <InputLabel id="label">Age</InputLabel>
-          <Select labelId="label" id="select" value="20">
-              <MenuItem value="10">Ten</MenuItem>
-              <MenuItem value="20">Twenty</MenuItem>
+          <InputLabel id="label">Color Scheme</InputLabel>
+          <Select onChange={(e) => handleChangeScheme(e)} labelId="label" id="select" value="mode">
+              <MenuItem value="monochrome">Monochrome</MenuItem>
+              <MenuItem value="monochrome-dark">Monochrome-Dark</MenuItem>
+              <MenuItem value="monochrome-light">Monochrome-Light</MenuItem>
+              <MenuItem value="analogic">Analogic</MenuItem>
+              <MenuItem value="complement">Complement</MenuItem>
+              <MenuItem value="analogic-complement">Analogic-Complement</MenuItem>
+              <MenuItem value="triad">Triad</MenuItem>
+              <MenuItem value="quad">Quad</MenuItem>
           </Select>
       </div>
   );
