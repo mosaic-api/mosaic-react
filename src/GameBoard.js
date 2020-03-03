@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { getInitGameState } from './helper.js';
 import { getScheme } from './mosaic-api.js';
+import BottomDrawer from './BottomDrawer.js';
 
 
 export default class GameBoard extends Component {
@@ -11,20 +12,20 @@ export default class GameBoard extends Component {
     }
 
     componentDidMount = async () => {
-        const schemeArray = await getScheme(this.state.startColor)
+        const schemeArray = await getScheme(this.props.startColor, 'analogic-complement')
         this.setState({
             schemeArray: schemeArray,
             gameboard: getInitGameState(), 
             startColor: this.props.startColor
         })
-        console.log('look', this.props.startColor)
-        console.log('lookyloo', schemeArray)
     }
     handleClick = (e) => {
         const cellId = e.target.id
+        if (!cellId.includes('cell')) return;
+        
         const idArray = cellId.split('_')[1].split('-');
-        console.log(cellId)
         const newBoard = this.state.gameboard.slice()
+        console.log('initial state', this.state.startColor)
        
         newBoard[Number(idArray[0])][Number(idArray[1])] = this.state.startColor
 
@@ -34,6 +35,8 @@ export default class GameBoard extends Component {
             gameboard: newBoard
         })
     }
+
+    // handleChangeScheme = (e) =>
 
     render() {
         console.log('gameboard', this.state.gameboard)
@@ -52,9 +55,12 @@ export default class GameBoard extends Component {
                 <div id="gameboard-container" onClick= { this.handleClick }>
                     {rowNodes}
                 </div>
-                <div id="tile-preview">preview</div>
-                <div> back button</div>
-                <div>bottom drawer</div>
+                <div id="preview-container">
+                    <div id="tile-preview" style={{backgroundColor: this.state.startColor}}>
+
+                    </div>
+                </div>
+                <BottomDrawer></BottomDrawer>
                 
             </div>
         )

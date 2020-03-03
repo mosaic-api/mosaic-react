@@ -15,7 +15,7 @@ import { getRandomColor } from './mosaic-api.js';
 
 export default class App extends Component {
   state = { 
-    startColor: "#FFF"
+    startColor: "#0047AB"
 }
 
 componentDidMount = async() => {
