@@ -1,5 +1,5 @@
-const maxRows = 6;
-const maxColumns = 6;
+const maxRows = 5;
+const maxColumns = 5;
 
 
 export function getInitGameState() {
@@ -10,7 +10,7 @@ export function getInitGameState() {
         gameState.push([]);
         //make null placeholder for each cell in grid
         for (let j = 0; j < maxColumns; j++) {
-            gameState[i].push(null);
+            gameState[i].push('#FFFFFF');
         }
     } 
     return gameState
