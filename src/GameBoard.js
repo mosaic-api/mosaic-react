@@ -8,11 +8,12 @@ export default class GameBoard extends Component {
     state = { 
         startColor: "#000000", 
         gameboard: getInitGameState(),
-        schemeArray: []
+        schemeArray: [],
+        mode: "analogic-complement"
     }
 
     componentDidMount = async () => {
-        const schemeArray = await getScheme(this.props.startColor, 'analogic-complement')
+        const schemeArray = await getScheme(this.props.startColor, this.state.mode)
         this.setState({
             schemeArray: schemeArray,
             gameboard: getInitGameState(), 
@@ -36,7 +37,14 @@ export default class GameBoard extends Component {
         })
     }
 
-    // handleChangeScheme = (e) =>
+    handleChangeScheme = async (e) =>  {
+        const schemeArray = await getScheme(this.state.startColor, e.target.value)
+        this.setState({
+            schemeArray: schemeArray,
+            mode: e.target.value
+        })
+        console.log('mode', this.state.mode)
+    }
 
     render() {
         console.log('gameboard', this.state.gameboard)
@@ -49,6 +57,7 @@ export default class GameBoard extends Component {
             return (<div className="row" id={`row_${i}`}>{cellNodes}</div>)
         })
         console.log(rowNodes)
+        console.log()
         return (
             <div>
                 <h2 className="title">Mosaic</h2>
@@ -60,7 +69,7 @@ export default class GameBoard extends Component {
 
                     </div>
                 </div>
-                <BottomDrawer></BottomDrawer>
+                <BottomDrawer handleChangeScheme={this.handleChangeScheme}></BottomDrawer>
                 
             </div>
         )
