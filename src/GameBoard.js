@@ -1,18 +1,24 @@
 import React, { Component } from 'react'
 import { getInitGameState } from './helper.js';
+import { getScheme } from './mosaic-api.js';
 
 
 export default class GameBoard extends Component {
     state = { 
-        startColor: '#000000', 
-        gameboard: getInitGameState()
+        startColor: "#000000", 
+        gameboard: getInitGameState(),
+        schemeArray: []
     }
 
-    componentDidMount = () => {
+    componentDidMount = async () => {
+        const schemeArray = await getScheme(this.state.startColor)
         this.setState({
+            schemeArray: schemeArray,
             gameboard: getInitGameState(), 
             startColor: this.props.startColor
         })
+        console.log('look', this.props.startColor)
+        console.log('lookyloo', schemeArray)
     }
     handleClick = (e) => {
         const cellId = e.target.id
@@ -20,9 +26,11 @@ export default class GameBoard extends Component {
         console.log(cellId)
         const newBoard = this.state.gameboard.slice()
        
-        newBoard[Number(idArray[0])][Number(idArray[1])] = this.props.startColor
+        newBoard[Number(idArray[0])][Number(idArray[1])] = this.state.startColor
 
+        const randomColor = Math.floor(Math.random() * this.state.schemeArray.length)
         this.setState({
+            startColor: this.state.schemeArray[randomColor],
             gameboard: newBoard
         })
     }

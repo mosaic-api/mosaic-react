@@ -10,6 +10,10 @@ export default withRouter(class Landing extends Component {
     state = {
         fade: false,
     }
+
+    handlePlay = () => {
+        this.props.history.push('/gameboard')
+    }
     componentDidMount = () => {
         this.setState({
             fade: true
@@ -23,7 +27,7 @@ export default withRouter(class Landing extends Component {
                     <h1 className="title">Mosaic</h1>
                 </Fade>
                 <div className="button-container">
-                    <Button variant="contained" color="primary" size="large" startIcon={<PlayCircleFilledIcon />}>Play</Button>
+                    <Button variant="contained" color="primary" size="large" startIcon={<PlayCircleFilledIcon onClick={this.handlePlay} />}>Play</Button>
                     <Button variant="contained" onClick={this.props.handleColorSwitch} color="secondary" size="small" startIcon={<ColorLensIcon />}>Color Switch</Button>
                 </div>
             </div>
