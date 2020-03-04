@@ -1,12 +1,12 @@
 * {
   box-sizing: border-box;
 }
-
-/* this master parent will alwasy be called */
 html, body {
   padding: 0;
   margin: 0
 }
+
+/* this master parent will alwasy be called */
 #App {
   text-align: center;
   height: 100vh;
@@ -56,23 +56,19 @@ html, body {
   height: 50%;
   margin: 0 auto;
 }
-
 .row {
     display: flex;
     justify-content: center;
     flex-wrap: nowrap;
     width: 100%;
 }
-
-
 .cell {
-  display: inline; 
+  display: inline-block; 
   width: 60px;
   height: 60px;
   clip-path: polygon(50% 0, 0 100%, 100% 100%);
   /* filter: drop-shadow(37px 10px 4px #4444dd) */
 }
-
 #tile-preview {
   box-shadow: inset 0 0 20px 5px rgba(255, 255, 255, 0.3);
   border-radius: 50%;
@@ -80,5 +76,41 @@ html, body {
   height: 75px;
   margin: 0 auto;
 }
-
 /* ==========GAMEBOARD=============== */
+
+/* ==============LOGIN============ */
+#login-parent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+
+#form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 50%;
+}
+/* ==============LOGIN============ */
+
+/* ===============USERBOARDS============ */
+#userboards-parent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+
+#userboards-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 70%;
+  list-style: none;
+  padding: 0;
+  font-size: 1.5em;
+}
+/* ===============USERBOARDS============ */

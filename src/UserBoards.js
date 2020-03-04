@@ -16,8 +16,9 @@ export default class UserBoards extends Component {
             return <Link to={`/gameboards/${board.id}`}> {board.board_name} </Link>
         })
         return (
-            <div>
-                <ul>
+            <div id="userboards-parent">
+                <h1 className="title">Mosaic</h1>
+                <ul id="userboards-container">
                     {boardNodes}
                 </ul>
                 
