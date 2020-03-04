@@ -23,6 +23,10 @@ import request from 'superagent';
       const userCheck = (!user) ? JSON.parse(localStorage.getItem('user')) : user
       return await request.post(`${URL}/user/saved`, stateObject).set('Authorization', userCheck.token)
     }
+    export async function updateBoard(stateObject, user, id) {
+      const userCheck = (!user) ? JSON.parse(localStorage.getItem('user')) : user
+      return await request.put(`${URL}/user/saved/${id}`, stateObject).set('Authorization', userCheck.token)
+    }
     export async function getBoards(user) {
       const userCheck = (!user) ? JSON.parse(localStorage.getItem('user')) : user
       return await request.get(`${URL}/user/saved`).set('Authorization', userCheck.token)
