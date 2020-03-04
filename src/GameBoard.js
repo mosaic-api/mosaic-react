@@ -4,6 +4,7 @@ import { getScheme, getBoards } from './mosaic-api.js';
 import BottomDrawer from './BottomDrawer.js';
 import { withRouter } from 'react-router-dom';
 import TopDrawer from './TopDrawer.js';
+import MosaicTitle from './MosaicTitle.js';
 
 
 export default withRouter (class GameBoard extends Component {
@@ -76,7 +77,8 @@ export default withRouter (class GameBoard extends Component {
             <div id="gameboard-app">
                 <TopDrawer user={this.props.user}/>
                 <div id="gameboard-parent">
-                    <h1 className="title">Mosaic</h1>
+                    
+                    <MosaicTitle schemeArray={this.state.schemeArray} />
                     <div id="gameboard-container" onClick= { this.handleClick }>
                         {rowNodes}
                     </div>

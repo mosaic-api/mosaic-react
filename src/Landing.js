@@ -5,6 +5,7 @@ import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import ColorLensIcon from '@material-ui/icons/ColorLens';
 import { withRouter } from 'react-router-dom';
 import TopDrawer from './TopDrawer.js';
+import MosaicTitle from './MosaicTitle.js';
 
 
 export default withRouter(class Landing extends Component {
@@ -15,6 +16,7 @@ export default withRouter(class Landing extends Component {
     handlePlay = () => {
         this.props.history.push('/gameboard')
     }
+    
     componentDidMount = () => {
         this.setState({
             fade: true
@@ -27,7 +29,7 @@ export default withRouter(class Landing extends Component {
                 <TopDrawer user={this.props.user}/>
                 <div id="landing-container">
                     <Fade in={this.state.fade} timeout={3000}>
-                        <h1 className="title">Mosaic</h1>
+                        <MosaicTitle />
                     </Fade>
                     <div id="button-container">
                         <Button variant="contained" color="primary" size="large" onClick={this.handlePlay} startIcon={<PlayCircleFilledIcon  />}>Play</Button>

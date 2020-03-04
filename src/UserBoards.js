@@ -3,6 +3,7 @@ import { getBoards, deleteBoard } from './mosaic-api.js';
 import { Link } from 'react-router-dom';
 import TopDrawer from './TopDrawer.js';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import MosaicTitle from './MosaicTitle.js';
 
 export default class UserBoards extends Component {
     state = {
@@ -32,7 +33,7 @@ export default class UserBoards extends Component {
             <div id="userboards-app">
                 <TopDrawer user={this.props.user}/>
                 
-                <h1 className="title">Mosaic</h1>
+                <MosaicTitle />
                 <ul id="userboards-container">
                     {boardNodes}
                 </ul>
