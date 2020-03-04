@@ -29,7 +29,11 @@ export default withRouter (class GameBoard extends Component {
                 userBoards.body.forEach(userBoard => {
                     if (userBoard.id === Number(this.props.match.params.id)) {
                         const boardParse = JSON.parse(userBoard.game_board);
-                        this.setState({ gameboard: boardParse});
+                        const schemeParse = JSON.parse(userBoard.scheme);
+                        this.setState({ 
+                            gameboard: boardParse,
+                            schemeArray: schemeParse
+                        });
                     }
                 })
                 
@@ -88,7 +92,7 @@ export default withRouter (class GameBoard extends Component {
                         </div>
                     </div>
                 </div>
-                <BottomDrawer history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
+                <BottomDrawer currentMode={this.state.mode} scheme={this.state.schemeArray} history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
             </div>
         )
     }

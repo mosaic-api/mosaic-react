@@ -7,6 +7,7 @@ import { Select, InputLabel, MenuItem } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { saveBoard } from './mosaic-api';
 import SettingsIcon from '@material-ui/icons/Settings';
+// import SaveAlert from 'SaveAlert.js';
 
 const useStyles = makeStyles(theme => ({
   list: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState, user, colorName}) {
+export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState, user, colorName, scheme, currentMode}) {
   const classes = useStyles();
 
   const [state, setState] = React.useState({
@@ -44,13 +45,16 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
   }
   const handleSave = async() => {
       const stringyState = JSON.stringify(gameState)
+      const stringyScheme = JSON.stringify(scheme)
       const gameObject = {
         board_name: colorName,
-        game_board: stringyState
+        game_board: stringyState,
+        scheme: stringyScheme,
+        mode: currentMode
       }
       await saveBoard(gameObject, user);
   }
-
+  
   const fullList = side => (
     <div className={classes.fullList} id="bottom-drawer-contents" role="presentation" onClick={toggleDrawer(side, false)} onKeyDown={toggleDrawer(side, false)}>
       <em>{colorName}</em>
