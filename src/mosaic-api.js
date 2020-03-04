@@ -11,3 +11,20 @@ import request from 'superagent';
       return schemeData.body.colors.map(color => color.hex.value)
     }
 
+    const URL = 'https://mosaic-node-db.herokuapp.com/api'
+
+    export async function signin(user) {
+      return await request.post(`${URL}/auth/signin`, user)
+    }
+    export async function signup(user) {
+      return await request.post(`${URL}/auth/signup`, user)
+    }
+    export async function saveBoard(stateObject, user) {
+      return await request.post(`${URL}/user/saved`, stateObject).set('Authorization', user.token)
+    }
+
+
+
+
+
+

@@ -6,7 +6,7 @@ import BottomDrawer from './BottomDrawer.js';
 
 export default class GameBoard extends Component {
     state = { 
-        startColor: "#000000", 
+        startColor: "#100000", 
         gameboard: getInitGameState(),
         schemeArray: [],
         mode: "analogic-complement"
@@ -26,7 +26,6 @@ export default class GameBoard extends Component {
         
         const idArray = cellId.split('_')[1].split('-');
         const newBoard = this.state.gameboard.slice()
-        console.log('initial state', this.state.startColor)
        
         newBoard[Number(idArray[0])][Number(idArray[1])] = this.state.startColor
 
@@ -43,12 +42,10 @@ export default class GameBoard extends Component {
             schemeArray: schemeArray,
             mode: e.target.value
         })
-        console.log('mode', this.state.mode)
     }
 
     render() {
-        console.log('gameboard', this.state.gameboard)
-        
+       
         const rowNodes = getInitGameState().map((rows, i) => {
             const cellNodes = getInitGameState()[0].map((cell, j) => {
                 return <div className="cell" style={{backgroundColor: this.state.gameboard[i][j]}} id={`cell_${i}-${j}`}></div>
@@ -56,11 +53,10 @@ export default class GameBoard extends Component {
 
             return (<div className="row" id={`row_${i}`}>{cellNodes}</div>)
         })
-        console.log(rowNodes)
-        console.log()
+     
         return (
-            <div>
-                <h2 className="title">Mosaic</h2>
+            <div id="gameboard-parent">
+                <h1 className="title">Mosaic</h1>
                 <div id="gameboard-container" onClick= { this.handleClick }>
                     {rowNodes}
                 </div>
@@ -69,7 +65,7 @@ export default class GameBoard extends Component {
 
                     </div>
                 </div>
-                <BottomDrawer handleChangeScheme={this.handleChangeScheme}></BottomDrawer>
+                <BottomDrawer handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
                 
             </div>
         )

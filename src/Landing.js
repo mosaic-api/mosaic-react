@@ -26,8 +26,9 @@ export default withRouter(class Landing extends Component {
                 <Fade in={this.state.fade} timeout={3000}>
                     <h1 className="title">Mosaic</h1>
                 </Fade>
-                <div className="button-container">
+                <div id="button-container">
                     <Button variant="contained" color="primary" size="large" onClick={this.handlePlay} startIcon={<PlayCircleFilledIcon  />}>Play</Button>
+                    
                     <Button variant="contained" onClick={this.props.handleColorSwitch} color="secondary" size="small" startIcon={<ColorLensIcon />}>Color Switch</Button>
                 </div>
             </div>
