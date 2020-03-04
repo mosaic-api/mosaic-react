@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { getInitGameState } from './helper.js';
 import { getScheme } from './mosaic-api.js';
 import BottomDrawer from './BottomDrawer.js';
+import { withRouter } from 'react-router-dom';
 
 
-export default class GameBoard extends Component {
+export default withRouter (class GameBoard extends Component {
     state = { 
         startColor: "#100000", 
         gameboard: getInitGameState(),
@@ -65,9 +66,9 @@ export default class GameBoard extends Component {
 
                     </div>
                 </div>
-                <BottomDrawer handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
+                <BottomDrawer history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
                 
             </div>
         )
     }
-}
+})

@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState, user}) {
+export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState, user, colorName}) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -23,7 +23,6 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
     right: false,
   });
 
-  console.log('userrrrr', user)
 
   const toggleDrawer = (side, open) => event => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -36,7 +35,7 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
   const handleSave = async() => {
       const stringyState = JSON.stringify(gameState)
       const gameObject = {
-        board_name: 'NAMMMMMME',
+        board_name: colorName,
         game_board: stringyState
       }
       await saveBoard(gameObject, user);

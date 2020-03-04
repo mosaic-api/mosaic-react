@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Button from '@material-ui/core/Button';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
+import { withRouter } from 'react-router-dom'
+// import createBrowserHistory from 'history/createBrowserHistory';
 
 const useStyles = makeStyles({
   list: {
@@ -13,7 +15,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SwipeableTemporaryDrawer() {
+const SwipeableTemporaryDrawer = withRouter(({history}) => {
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -29,10 +31,10 @@ export default function SwipeableTemporaryDrawer() {
 
     setState({ ...state, [side]: open });
   };
-
+  const handleMyBoards = () => history.push('/userboards');
   const fullList = side => (
     <div className={classes.fullList} role="presentation" onClick={toggleDrawer(side, false)} onKeyDown={toggleDrawer(side, false)}>
-      <Button variant="contained" color="primary" startIcon={<PlayCircleFilledIcon/>}>Play</Button>
+      <Button variant="contained" color="primary" onClick={e => handleMyBoards()} startIcon={<PlayCircleFilledIcon/>}>My Boards</Button>
     </div>
   );
 
@@ -42,4 +44,6 @@ export default function SwipeableTemporaryDrawer() {
       <SwipeableDrawer anchor="top" open={state.top} onClose={toggleDrawer('top', false)} onOpen={toggleDrawer('top', true)}>{fullList('top')}</SwipeableDrawer>
     </div>
   );
-}
+})
+
+export default SwipeableTemporaryDrawer;

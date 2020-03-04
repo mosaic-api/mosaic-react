@@ -22,6 +22,9 @@ import request from 'superagent';
     export async function saveBoard(stateObject, user) {
       return await request.post(`${URL}/user/saved`, stateObject).set('Authorization', user.token)
     }
+    export async function getBoards(user) {
+      return await request.get(`${URL}/user/saved`).set('Authorization', user.token)
+    }
 
 
 
