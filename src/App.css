@@ -5,8 +5,7 @@ html, body {
   padding: 0;
   margin: 0
 }
-a   
-{
+a {
   text-decoration: none;
 }
 /* this master parent will alwasy be called */
@@ -18,8 +17,9 @@ a
 .title {
   color: whitesmoke;
   font-family: 'Comfortaa';
-  font-size: 3em;
-  text-shadow: 3px 3px 1px rgba(0, 0, 0, 0.5);
+  font-size: 3.5em;
+  font-weight: bold;
+  text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
   margin: 0;
 }
 /* until we figure out switching background color across app */
@@ -32,12 +32,13 @@ a
 #top-drawer-contents, #bottom-drawer-contents {
  
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-evenly;
   align-items: center;
 
   padding: 8px 8px;
   background-color: rgba(255, 127, 80, 0.5);
 }
+
 /* =======================DRAWER======== */
 
 /* =========LANDING PAGE============ */
@@ -56,7 +57,9 @@ a
 }
 #landing-container .title {
   position: relative;
-  top: 12%
+  top: 12%;
+  font-size: 4.5em;
+  font-weight: normal;
 }
 /* child container in landing page */
 #button-container {
@@ -75,7 +78,6 @@ a
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  
 }
 #gameboard-parent {
   height: 100%;

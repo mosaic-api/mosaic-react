@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { TextField, Button } from '@material-ui/core';
-import { signup, signin } from './mosaic-api.js'
+import { signup, signin } from './mosaic-api.js';
+import MosaicTitle from './MosaicTitle.js';
 
 export default class Login extends Component {
     state = {
@@ -56,7 +57,7 @@ export default class Login extends Component {
     render() {
         return (
             <div id="login-parent">
-                <h1 className="title">Mosaic</h1>
+                <MosaicTitle />
 
                 <form id="form-container"> 
                     <Button variant="contained" color="secondary" size="small" onClick={e => this.setState({logBool: !this.state.logBool})}>{this.state.logBool ? "Don't have an account?": "Already Signed Up?"}</Button>
