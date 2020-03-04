@@ -2,36 +2,44 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
 import { Select, InputLabel, MenuItem } from '@material-ui/core';
 import { saveBoard } from './mosaic-api';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   list: {
     width: 250,
   },
   fullList: {
     width: 'auto',
   },
-});
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 140,
+  }
+}));
 
 export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState, user, colorName}) {
   const classes = useStyles();
+
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
-
+  const [mode, setMode] = React.useState('');
 
   const toggleDrawer = (side, open) => event => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-
     setState({ ...state, [side]: open });
   };
-
+  const handleChangeSelect = e => {
+    setMode(e.target.value);
+    handleChangeScheme(e)
+  }
   const handleSave = async() => {
       const stringyState = JSON.stringify(gameState)
       const gameObject = {
@@ -42,9 +50,13 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
   }
 
   const fullList = side => (
-    <div className={classes.fullList} role="presentation" onClick={toggleDrawer(side, false)} onKeyDown={toggleDrawer(side, false)}>
-          <InputLabel id="label">Color Scheme</InputLabel>
-          <Select onChange={(e) => handleChangeScheme(e)} labelId="label" id="select" value="mode">
+    <div className={classes.fullList} id="bottom-drawer-contents" role="presentation" onClick={toggleDrawer(side, false)} onKeyDown={toggleDrawer(side, false)}>
+      <FormControl variant="outlined" className={classes.formControl}>
+
+          <InputLabel id="select-label">Color Palette</InputLabel>
+
+          <Select onChange={handleChangeSelect} labelId="select-label" id="select-outlined" value={mode}>
+
               <MenuItem value="monochrome">Monochrome</MenuItem>
               <MenuItem value="monochrome-dark">Monochrome-Dark</MenuItem>
               <MenuItem value="monochrome-light">Monochrome-Light</MenuItem>
@@ -54,13 +66,15 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
               <MenuItem value="triad">Triad</MenuItem>
               <MenuItem value="quad">Quad</MenuItem>
           </Select>
-          <Button onClick={e => handleSave()}>Save Mosaic</Button>
-      </div>
+      </FormControl>
+      <Button variant="contained" size="small" color="secondary" onClick={e => handleSave()}>Save Mosaic</Button>
+    </div>
   );
 
   return (
     <div>
       <Button onClick={toggleDrawer('bottom', true)}>Open Bottom</Button>
+
       <SwipeableDrawer anchor="bottom" open={state.bottom} onClose={toggleDrawer('bottom', false)} onOpen={toggleDrawer('bottom', true)}>{fullList('bottom')}</SwipeableDrawer>
     </div>
   );

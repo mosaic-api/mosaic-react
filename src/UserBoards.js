@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getBoards } from './mosaic-api.js';
 import { Link } from 'react-router-dom';
+import TopDrawer from './TopDrawer.js'
 
 export default class UserBoards extends Component {
     state = {
@@ -13,11 +14,14 @@ export default class UserBoards extends Component {
     }
     render() {
         const boardNodes = this.state.boardsArray.map(board => {
-            return <Link to={`/gameboards/${board.id}`}> {board.board_name} </Link>
+            return <Link to={`/gameboard/${board.id}`}> {board.board_name} </Link>
         })
         return (
-            <div>
-                <ul>
+            <div id="userboards-app">
+                <TopDrawer />
+                
+                <h1 className="title">Mosaic</h1>
+                <ul id="userboards-container">
                     {boardNodes}
                 </ul>
                 

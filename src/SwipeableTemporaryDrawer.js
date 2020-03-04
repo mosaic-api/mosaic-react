@@ -11,6 +11,8 @@ import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 // import InboxIcon from '@material-ui/icons/MoveToInbox';
 // import MailIcon from '@material-ui/icons/Mail';
 
+
+// ++++++++++++++++++++++WE SHOULD DELETE THIS++++++++++++++++++++++
 const useStyles = makeStyles({
   list: {
     width: 250,

@@ -3,6 +3,7 @@ import { getInitGameState } from './helper.js';
 import { getScheme } from './mosaic-api.js';
 import BottomDrawer from './BottomDrawer.js';
 import { withRouter } from 'react-router-dom';
+import TopDrawer from './TopDrawer.js';
 
 
 export default withRouter (class GameBoard extends Component {
@@ -56,18 +57,20 @@ export default withRouter (class GameBoard extends Component {
         })
      
         return (
-            <div id="gameboard-parent">
-                <h1 className="title">Mosaic</h1>
-                <div id="gameboard-container" onClick= { this.handleClick }>
-                    {rowNodes}
-                </div>
-                <div id="preview-container">
-                    <div id="tile-preview" style={{backgroundColor: this.state.startColor}}>
+            <div id="gameboard-app">
+                <TopDrawer />
+                <div id="gameboard-parent">
+                    <h1 className="title">Mosaic</h1>
+                    <div id="gameboard-container" onClick= { this.handleClick }>
+                        {rowNodes}
+                    </div>
+                    <div id="preview-container">
+                        <div id="tile-preview" style={{backgroundColor: this.state.startColor}}>
 
+                        </div>
                     </div>
                 </div>
                 <BottomDrawer history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
-                
             </div>
         )
     }
