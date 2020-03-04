@@ -12,7 +12,8 @@ export default withRouter (class GameBoard extends Component {
         startColor: "#100000", 
         gameboard: getInitGameState(),
         schemeArray: [],
-        mode: "analogic-complement"
+        mode: "analogic-complement",
+        id: null
     }
 
     componentDidMount = async () => {
@@ -32,7 +33,8 @@ export default withRouter (class GameBoard extends Component {
                         const schemeParse = JSON.parse(userBoard.scheme);
                         this.setState({ 
                             gameboard: boardParse,
-                            schemeArray: schemeParse
+                            schemeArray: schemeParse,
+                            id: this.props.match.params.id
                         });
                     }
                 })
@@ -92,7 +94,7 @@ export default withRouter (class GameBoard extends Component {
                         </div>
                     </div>
                 </div>
-                <BottomDrawer currentMode={this.state.mode} scheme={this.state.schemeArray} history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
+                <BottomDrawer id={this.state.id} currentMode={this.state.mode} scheme={this.state.schemeArray} history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
             </div>
         )
     }

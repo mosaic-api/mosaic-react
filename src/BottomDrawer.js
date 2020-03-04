@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import { Select, InputLabel, MenuItem } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import { saveBoard } from './mosaic-api';
+import { saveBoard, updateBoard } from './mosaic-api';
 import SettingsIcon from '@material-ui/icons/Settings';
 // import SaveAlert from 'SaveAlert.js';
 
@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState, user, colorName, scheme, currentMode}) {
+export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState, user, colorName, scheme, currentMode, id}) {
   const classes = useStyles();
 
   const [state, setState] = React.useState({
@@ -44,8 +44,9 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
     handleChangeScheme(e)
   }
   const handleSave = async() => {
-      const stringyState = JSON.stringify(gameState)
-      const stringyScheme = JSON.stringify(scheme)
+    const stringyState = JSON.stringify(gameState)
+    const stringyScheme = JSON.stringify(scheme)
+    if (!id){
       const gameObject = {
         board_name: colorName,
         game_board: stringyState,
@@ -53,6 +54,14 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
         mode: currentMode
       }
       await saveBoard(gameObject, user);
+    } else {
+      const gameObject = {
+        game_board: stringyState,
+        scheme: stringyScheme,
+        mode: currentMode
+      }
+      await updateBoard(gameObject, user, id)
+    }
   }
   
   const fullList = side => (
