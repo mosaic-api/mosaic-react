@@ -24,7 +24,7 @@ export default withRouter(class Landing extends Component {
         const color = {backgroundColor: `${this.props.startColor}`}
         return (
             <div style={color} id="landing-app">
-                <TopDrawer />
+                <TopDrawer user={this.props.user}/>
                 <div id="landing-container">
                     <Fade in={this.state.fade} timeout={3000}>
                         <h1 className="title">Mosaic</h1>

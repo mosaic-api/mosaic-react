@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Button from '@material-ui/core/Button';
@@ -14,8 +14,11 @@ const useStyles = makeStyles({
     width: 'auto',
   },
 });
+const storedUser = JSON.parse(localStorage.getItem('user'));
 
-const SwipeableTemporaryDrawer = withRouter(({history}) => {
+const SwipeableTemporaryDrawer = withRouter(({history, user}) => {
+  const realUser = user ? user : storedUser;
+
 
   const classes = useStyles();
 
@@ -24,6 +27,7 @@ const SwipeableTemporaryDrawer = withRouter(({history}) => {
     left: false,
     bottom: false,
     right: false,
+    logBool: true,
   });
 
   const toggleDrawer = (side, open) => event => {
@@ -35,13 +39,25 @@ const SwipeableTemporaryDrawer = withRouter(({history}) => {
 
   const handleMyBoards = () => history.push('/userboards');
   const handleLoginButton = () => history.push('/login');
+  const handleLogoutButton = () => {
+    localStorage.clear();
+    history.push('/login');
+  };
+
+  const button = () => (!realUser) ? 
+    <Button variant="contained" size="small" color="secondary" onClick={e => handleLoginButton()} startIcon={<PlayCircleFilledIcon/>}>Login</Button> : <div>
+    <em>{realUser.name}</em>
+    <Button variant="contained" size="small" color="secondary" onClick={e => handleLogoutButton()} startIcon={<PlayCircleFilledIcon/>}>Logout</Button>
+  </div>
+  ;
 
   const fullList = side => (
     <div className={classes.fullList} id="top-drawer-contents" role="presentation" onClick={toggleDrawer(side, false)} onKeyDown={toggleDrawer(side, false)}>
 
-      <Button variant="contained" size="small" color="primary" onClick={e => handleMyBoards()} startIcon={<PlayCircleFilledIcon/>}>My Boards</Button>
+      
 
-      <Button variant="contained" size="small" color="secondary" onClick={e => handleLoginButton()} startIcon={<PlayCircleFilledIcon/>}>Login</Button>
+      {button()}
+      <Button variant="contained" size="small" color="primary" onClick={e => handleMyBoards()} startIcon={<PlayCircleFilledIcon/>}>My Boards</Button>
     </div>
   );
 

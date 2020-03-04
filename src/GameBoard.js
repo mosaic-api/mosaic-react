@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { getInitGameState } from './helper.js';
-import { getScheme } from './mosaic-api.js';
+import { getScheme, getBoards } from './mosaic-api.js';
 import BottomDrawer from './BottomDrawer.js';
 import { withRouter } from 'react-router-dom';
 import TopDrawer from './TopDrawer.js';
@@ -21,7 +21,23 @@ export default withRouter (class GameBoard extends Component {
             gameboard: getInitGameState(), 
             startColor: this.props.startColor
         })
+
+        if (this.props.match.params.id) {
+            try {
+                const userBoards = await getBoards(this.props.user);
+                userBoards.body.forEach(userBoard => {
+                    if (userBoard.id === Number(this.props.match.params.id)) {
+                        const boardParse = JSON.parse(userBoard.game_board);
+                        this.setState({ gameboard: boardParse});
+                    }
+                })
+                
+            } catch (err) {
+                return;
+            }
+        }
     }
+
     handleClick = (e) => {
         const cellId = e.target.id
         if (!cellId.includes('cell')) return;
@@ -58,7 +74,7 @@ export default withRouter (class GameBoard extends Component {
      
         return (
             <div id="gameboard-app">
-                <TopDrawer />
+                <TopDrawer user={this.props.user}/>
                 <div id="gameboard-parent">
                     <h1 className="title">Mosaic</h1>
                     <div id="gameboard-container" onClick= { this.handleClick }>
