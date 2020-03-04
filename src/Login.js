@@ -16,7 +16,8 @@ export default class Login extends Component {
         })
     }
 
-    handleSignIn = async() => {
+    handleSignIn = async(e) => {
+        e.preventDefault()
         const user = {
             email: this.state.emailInput,
             password: this.state.passwordInput,
@@ -29,7 +30,8 @@ export default class Login extends Component {
             alert(err)
         }
     }
-    handleSignUp = async() => {
+    handleSignUp = async(e) => {
+        e.preventDefault()
         const user = {
             email: this.state.emailInput,
             password: this.state.passwordInput,
@@ -54,16 +56,16 @@ export default class Login extends Component {
             <div id="login-parent">
                 <h1 className="title">Mosaic</h1>
 
-                <div id="form-container"> 
+                <form id="form-container"> 
                     <Button variant="contained" color="secondary" size="small" onClick={e => this.setState({logBool: !this.state.logBool})}>{this.state.logBool ? "Don't have an account?": "Already Signed Up?"}</Button>
 
                     <TextField id="nameInput" style={this.hidden()} value={this.state.nameInput} onChange={this.handleInput} label="Name" variant="outlined"/>
 
-                    <TextField id="emailInput" value={this.state.emailInput} onChange={this.handleInput} label="Email" variant="outlined"/>
+                    <TextField required id="emailInput" value={this.state.emailInput} onChange={this.handleInput} label="Email" variant="outlined"/>
 
-                    <TextField id="passwordInput" value={this.state.passwordInput} onChange={this.handleInput} label="Password" variant="outlined"/>
+                    <TextField required id="passwordInput" value={this.state.passwordInput} type="password" onChange={this.handleInput} label="Password" variant="outlined"/>
                     {this.button()}
-                </div>
+                </form>
             </div>
         )
     }

@@ -9,7 +9,7 @@ import GameBoard from './GameBoard.js';
 import UserBoards from './UserBoards.js';
 import AboutUs from './AboutUs.js';
 import Landing from './Landing.js';
-import TopDrawer from './TopDrawer.js';
+// import TopDrawer from './TopDrawer.js';
 import { getRandomColor } from './mosaic-api.js';
 
 
@@ -40,7 +40,7 @@ setUser = (user) => {
     return (
       <div id="App">
         <BrowserRouter>
-          <TopDrawer></TopDrawer>
+          {/* <TopDrawer></TopDrawer> */}
           <Switch>
             <Route exact path="/login" render={(props) => <Login {...props} setUser={this.setUser}/>} />
 
