@@ -4,7 +4,9 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import { Select, InputLabel, MenuItem } from '@material-ui/core';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { saveBoard } from './mosaic-api';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 const useStyles = makeStyles(theme => ({
   list: {
@@ -51,6 +53,7 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
 
   const fullList = side => (
     <div className={classes.fullList} id="bottom-drawer-contents" role="presentation" onClick={toggleDrawer(side, false)} onKeyDown={toggleDrawer(side, false)}>
+      <em>{colorName}</em>
       <FormControl variant="outlined" className={classes.formControl}>
 
           <InputLabel id="select-label">Color Palette</InputLabel>
@@ -67,13 +70,13 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
               <MenuItem value="quad">Quad</MenuItem>
           </Select>
       </FormControl>
-      <Button variant="contained" size="small" color="secondary" onClick={e => handleSave()}>Save Mosaic</Button>
+      <Button variant="contained" size="small" color="secondary" onClick={e => handleSave()} startIcon={<AddCircleIcon/>}>Save Mosaic</Button>
     </div>
   );
 
   return (
     <div>
-      <Button onClick={toggleDrawer('bottom', true)}>Open Bottom</Button>
+      <Button onClick={toggleDrawer('bottom', true)} size="large" startIcon={<SettingsIcon/>}></Button>
 
       <SwipeableDrawer anchor="bottom" open={state.bottom} onClose={toggleDrawer('bottom', false)} onOpen={toggleDrawer('bottom', true)}>{fullList('bottom')}</SwipeableDrawer>
     </div>
