@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { getBoards } from './mosaic-api.js';
+import { getBoards, deleteBoard } from './mosaic-api.js';
 import { Link } from 'react-router-dom';
-import TopDrawer from './TopDrawer.js'
+import TopDrawer from './TopDrawer.js';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
 export default class UserBoards extends Component {
     state = {
@@ -12,13 +13,24 @@ export default class UserBoards extends Component {
         const boardsData = await getBoards(this.props.user)
         this.setState({boardsArray: boardsData.body})
     }
+
+    handleDelete = async (id) => {
+        await deleteBoard(id, this.props.user)
+        const boardsData = await getBoards(this.props.user)
+        this.setState({boardsArray: boardsData.body})
+    }
+
     render() {
         const boardNodes = this.state.boardsArray.map(board => {
-            return <Link to={`/gameboard/${board.id}`}> {board.board_name} </Link>
+            return <div>
+                <Link to={`/gameboard/${board.id}`}> {board.board_name} </Link>
+                <DeleteOutlineIcon onClick={e => this.handleDelete(board.id)}/>        
+                </div>
+                
         })
         return (
             <div id="userboards-app">
-                <TopDrawer />
+                <TopDrawer user={this.props.user}/>
                 
                 <h1 className="title">Mosaic</h1>
                 <ul id="userboards-container">
