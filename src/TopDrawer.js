@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Button from '@material-ui/core/Button';
-import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import { withRouter } from 'react-router-dom'
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AppsIcon from '@material-ui/icons/Apps';
+import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 // import createBrowserHistory from 'history/createBrowserHistory';
 
 const useStyles = makeStyles({
@@ -45,9 +48,9 @@ const SwipeableTemporaryDrawer = withRouter(({history, user}) => {
   };
 
   const button = () => (!realUser) ? 
-    <Button variant="contained" size="small" color="secondary" onClick={e => handleLoginButton()} startIcon={<PlayCircleFilledIcon/>}>Login</Button> : <div>
+    <Button variant="contained" size="small" color="secondary" onClick={e => handleLoginButton()} startIcon={<AccountCircleIcon/>}>Login</Button> : <div>
     <em>{realUser.name}</em>
-    <Button variant="contained" size="small" color="secondary" onClick={e => handleLogoutButton()} startIcon={<PlayCircleFilledIcon/>}>Logout</Button>
+    <Button variant="contained" size="small" color="secondary" onClick={e => handleLogoutButton()} startIcon={<AccountCircleIcon/>}>Logout</Button>
   </div>
   ;
 
@@ -57,13 +60,14 @@ const SwipeableTemporaryDrawer = withRouter(({history, user}) => {
       
 
       {button()}
-      <Button variant="contained" size="small" color="primary" onClick={e => handleMyBoards()} startIcon={<PlayCircleFilledIcon/>}>My Boards</Button>
+      <Button variant="contained" size="small" color="primary" onClick={e => handleMyBoards()} startIcon={<SubscriptionsIcon/>}>My Mosaics</Button>
+      <Button variant="contained" size="small" color="primary" onClick={e => history.push('/')} startIcon={<AddCircleIcon/>}>New Mosaic</Button>
     </div>
   );
 
   return (
     <div id="top-drawer-div">
-      <Button onClick={toggleDrawer('top', true)}>Open Top</Button>
+      <Button onClick={toggleDrawer('top', true)} size="large" startIcon={<AppsIcon/>}></Button>
       
       <SwipeableDrawer anchor="top" open={state.top} onClose={toggleDrawer('top', false)} onOpen={toggleDrawer('top', true)}>{fullList('top')}</SwipeableDrawer>
     </div>

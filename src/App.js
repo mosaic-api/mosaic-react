@@ -11,6 +11,7 @@ import AboutUs from './AboutUs.js';
 import Landing from './Landing.js';
 // import TopDrawer from './TopDrawer.js';
 import { getRandomColor } from './mosaic-api.js';
+import PrivateRoute from './PrivateRoute.js'
 
 
 
@@ -46,7 +47,7 @@ setUser = (user) => {
 
             <Route exact path="/gameboard/:id?" render={() => <GameBoard colorName={this.state.colorName} startColor={ this.state.startColor } user={this.state.user} />} />
 
-            <Route exact path="/userboards" render={(props) => <UserBoards {...props} user={this.state.user} />} />
+            <PrivateRoute exact path="/userboards" component={UserBoards} user={this.state.user} />
             <Route exact path="/aboutus" component={AboutUs} />
             <Route exact path="/" render={(props) => <Landing {...props} user={this.state.user} startColor={ this.state.startColor } handleColorSwitch={this.handleColorSwitch} />} />
           </Switch>
