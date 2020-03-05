@@ -6,6 +6,8 @@
 
 ### Problem Domain: Stress in a stressfull world! Don't you just wanna set aside your worries and take the edge off modern life?? Well there are drugs for that, but in the meantime there is ... Mosaic :)
 
+### To Play click: https://the-mosaic.herokuapp.com/
+
 ### Version 1.0.0 
 
 ### Front End Dependencies: 
@@ -42,7 +44,6 @@
     "supertest": "^4.0.2"
   },
 ```
-### To Play click: https://the-mosaic.herokuapp.com/
 
 ### API Endpoints: 
 ```
@@ -89,7 +90,7 @@ const URL = 'https://mosaic-node-db.herokuapp.com/api'
 ![BoardsDB](./public/Boards-DB-ScreenShot.png "boards database")
 
 ### Users Database structure
-![UsersDB](./public\Users-DB-ScreenShot.png "users database")
+![UsersDB](./public/Users-DB-ScreenShot.png "users database")
 
 ## MIT License
 ### Copyright 2020 The Mosaic
