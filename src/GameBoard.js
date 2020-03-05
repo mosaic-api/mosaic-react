@@ -28,6 +28,7 @@ export default withRouter (class GameBoard extends Component {
             musicboard: getInitGameState()
         })
 
+
         if (this.props.match.params.id) {
             try {
                 const userBoards = await getBoards(this.props.user);
@@ -134,9 +135,10 @@ export default withRouter (class GameBoard extends Component {
 
             return (<div className="row" id={`row_${i}`}>{cellNodes}</div>)
         })
-     
+    
+        const background = {backgroundColor: this.props.bgColor}
         return (
-            <div id="gameboard-app">
+            <div style={background} id="gameboard-app">
                 <TopDrawer user={this.props.user}/>
                 <div id="gameboard-parent">
                     
