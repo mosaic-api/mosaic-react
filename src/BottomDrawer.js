@@ -104,13 +104,13 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
               <MenuItem value="quad">Quad</MenuItem>
           </Select>
       </FormControl>
-      <Button variant="contained" size="small" color="secondary" onClick={e => handleSave()} startIcon={<AddCircleIcon/>}>Save Mosaic</Button>
+      <Button variant="contained" size="small" color="secondary" disabled={user ? false : true} onClick={e => handleSave()} startIcon={<AddCircleIcon/>}>{user ? 'Save Mosaic': 'Must Login'}</Button>
     </div>
   );
 
   return (
     <div className={classes.root}>
-      <Button onClick={toggleDrawer('bottom', true)} size="large" startIcon={<SettingsIcon/>}></Button>
+      <Button id="bottomDrawerButton" onClick={toggleDrawer('bottom', true)} size="large" startIcon={<SettingsIcon/>}></Button>
 
       <SwipeableDrawer anchor="bottom" open={state.bottom} onClose={toggleDrawer('bottom', false)} onOpen={toggleDrawer('bottom', true)}>{fullList('bottom')}</SwipeableDrawer>
 

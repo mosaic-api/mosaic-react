@@ -18,19 +18,28 @@ import PrivateRoute from './PrivateRoute.js'
 export default class App extends Component {
   state = { 
     startColor: "#0047AB",
-    user: null
+    user: null,
+    bgColor: null
 }
 
 componentDidMount = async() => {
     const colorData = await getRandomColor();
+    const rgbaString = `rgba(${colorData.body.rgb.r}, ${colorData.body.rgb.g}, ${colorData.body.rgb.b}, 0.3)`
     this.setState({
-        startColor: colorData.body.hex.value, colorName: colorData.body.name.value
+        startColor: colorData.body.hex.value, 
+        colorName: colorData.body.name.value,
+        bgColor: rgbaString
     })
     
 }
 handleColorSwitch = async() => {
     const colorData = await getRandomColor();
-    this.setState({startColor: colorData.body.hex.value, colorName: colorData.body.name.value})
+    const rgbaString = `rgba(${colorData.body.rgb.r}, ${colorData.body.rgb.g}, ${colorData.body.rgb.b}, 0.3)`
+    this.setState({
+      startColor: colorData.body.hex.value, 
+      colorName: colorData.body.name.value,
+      bgColor: rgbaString
+    })
 }
 setUser = (user) => {
   this.setState({user: user})
@@ -45,7 +54,8 @@ setUser = (user) => {
           <Switch>
             <Route exact path="/login" render={(props) => <Login {...props} setUser={this.setUser}/>} />
 
-            <Route exact path="/gameboard/:id?" render={() => <GameBoard colorName={this.state.colorName} startColor={ this.state.startColor } user={this.state.user} />} />
+            <Route exact path="/gameboard/:id?" render={() => <GameBoard colorName={this.state.colorName} startColor={ this.state.startColor } bgColor={this.state.bgColor} user={this.state.user} />} />
+            {/* <PrivateRoute exact path="/gameboard/:id?" component={GameBoard} colorName={this.state.colorName} startColor={ this.state.startColor} user={this.state.user} /> */}
 
             <PrivateRoute exact path="/userboards" component={UserBoards} user={this.state.user} />
             <Route exact path="/aboutus" component={AboutUs} />

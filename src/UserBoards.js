@@ -31,13 +31,12 @@ export default class UserBoards extends Component {
         })
         return (
             <div id="userboards-app">
-                <TopDrawer user={this.props.user}/>
                 
                 <MosaicTitle />
                 <ul id="userboards-container">
                     {boardNodes}
                 </ul>
-                
+                <TopDrawer user={this.props.user}/>
             </div>
         )
     }

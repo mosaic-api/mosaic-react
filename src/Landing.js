@@ -26,7 +26,6 @@ export default withRouter(class Landing extends Component {
         const color = {backgroundColor: `${this.props.startColor}`}
         return (
             <div style={color} id="landing-app">
-                <TopDrawer user={this.props.user}/>
                 <div id="landing-container">
                     <Fade in={this.state.fade} timeout={3000}>
                         <MosaicTitle />
@@ -37,6 +36,8 @@ export default withRouter(class Landing extends Component {
                         <Button variant="contained" onClick={this.props.handleColorSwitch} color="secondary" size="small" startIcon={<ColorLensIcon />}>Color Switch</Button>
                     </div>
                 </div>
+                <TopDrawer user={this.props.user}/>
+
             </div>
         )
     }
