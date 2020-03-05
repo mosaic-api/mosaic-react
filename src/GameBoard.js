@@ -101,7 +101,7 @@ export default withRouter (class GameBoard extends Component {
         let blankBoard = getInitGameState();
         this.setState({ gameboard: getInitGameState() })
         let playTime = setInterval(() => {
-            if (mapOver[CountArray[0]][CountArray[1]] !== "rgba(128, 128, 128, 0.199)") {
+            if (!isNaN(mapOver[CountArray[0]][CountArray[1]])) {
                 const savedNote = this.state.musicboard[CountArray[0]][CountArray[1]];
                 console.log(savedNote);
                 playAudio(savedNote);
@@ -140,7 +140,6 @@ export default withRouter (class GameBoard extends Component {
         return (
 
             <div style={background} id="gameboard-app">
-                <TopDrawer user={this.props.user}/>
                 <div id="gameboard-parent">
                     
                     <MosaicTitle schemeArray={this.state.schemeArray} />
