@@ -16,7 +16,8 @@ export default withRouter (class GameBoard extends Component {
         mode: "analogic-complement",
         id: null,
         playInt: null,
-        musicboard: getInitGameState()
+        musicboard: getInitGameState(),
+        colorName: null
     }
 
     componentDidMount = async () => {
@@ -25,7 +26,8 @@ export default withRouter (class GameBoard extends Component {
             schemeArray: schemeArray,
             gameboard: getInitGameState(), 
             startColor: this.props.startColor,
-            musicboard: getInitGameState()
+            musicboard: getInitGameState(),
+            colorName: this.props.colorName
         })
 
 
@@ -41,7 +43,8 @@ export default withRouter (class GameBoard extends Component {
                             gameboard: boardParse,
                             schemeArray: schemeParse,
                             id: this.props.match.params.id,
-                            musicboard: musicParse
+                            musicboard: musicParse,
+                            colorName: userBoard.board_name
                         });
                     }
                 })
@@ -148,12 +151,12 @@ export default withRouter (class GameBoard extends Component {
                     </div>
                     <div id="preview-container">
                         <div id="tile-preview" style={{backgroundColor: this.state.startColor}}>
-
                         </div>
                     </div>
                 </div>
                 <button onClick={e => this.handlePlay()}>THING</button> {/* ADDITION */}
-                <BottomDrawer id={this.state.id} currentMusic={this.state.musicboard} getSaved={this.getSaved} scheme={this.state.schemeArray} history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
+                <BottomDrawer id={this.state.id} currentMusic={this.state.musicboard} getSaved={this.getSaved} scheme={this.state.schemeArray} history={this.props.history} colorName={this.state.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
+                
                 <TopDrawer user={this.props.user}/>
             </div>
         )
