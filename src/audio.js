@@ -1,15 +1,18 @@
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-const gainNode = audioCtx.createGain();
 let oscillatorNodes = [];
+let oscillatorGainNodes = [];
+let muteBool = false;
 
 const hexArray = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00];
+// const hexArray = [523.25, 587.33, 659.25, 698.46, 783.99, 880.00];
 
-let convolverTime = .5;
+let convolverTime = .3;
 let convolverEffect = (function() {
     let convolver = audioCtx.createConvolver(),
         noiseBuffer = audioCtx.createBuffer(2, convolverTime * audioCtx.sampleRate, audioCtx.sampleRate),
         left = noiseBuffer.getChannelData(0),
         right = noiseBuffer.getChannelData(1);
+        convolver.normalize = true;
     for (let i = 0; i < noiseBuffer.length; i++) {
         left[i] = Math.random() * 2 - 1;
         right[i] = Math.random() * 2 - 1;
@@ -18,21 +21,37 @@ let convolverEffect = (function() {
     return convolver;
 })();
 
+const biquadFilter = audioCtx.createBiquadFilter();
+biquadFilter.type = "lowpass";
+biquadFilter.frequency.setValueAtTime(1000, audioCtx.currentTime);
+biquadFilter.gain.setValueAtTime(25, audioCtx.currentTime);
+
 const audioStart = () => {
     audioCtx.resume();
-    gainNode.connect(convolverEffect);
+    biquadFilter.connect(convolverEffect);
     convolverEffect.connect(audioCtx.destination);
-    gainNode.gain.setValueAtTime(.9, audioCtx.currentTime);     
 };
 
 export const playAudio = (randomColor) => {
     const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
     const addNode = oscillatorNodes.push(oscillator);
+    const addGain = oscillatorGainNodes.push(gainNode);
     oscillatorNodes[addNode - 1].connect(gainNode);
-    oscillatorNodes[addNode - 1].type = 'sine';
+    oscillatorGainNodes[addGain - 1].connect(convolverEffect);
+
+    !muteBool ? oscillatorGainNodes[addGain - 1].gain.linearRampToValueAtTime(.5, audioCtx.currentTime) : oscillatorGainNodes[addGain - 1].gain.setValueAtTime(0, audioCtx.currentTime);
+    oscillatorNodes[addNode - 1].type = 'triangle';
     oscillatorNodes[addNode - 1].start(); 
     oscillatorNodes[addNode - 1].frequency.setValueAtTime(hexArray[randomColor], audioCtx.currentTime);
-    oscillatorNodes[addNode - 1].stop(audioCtx.currentTime + 1)
+    
+    !muteBool ? oscillatorGainNodes[addGain - 1].gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 1) : oscillatorGainNodes[addGain - 1].gain.setValueAtTime(0, audioCtx.currentTime + 1);
+    oscillatorNodes[addNode - 1].stop(audioCtx.currentTime + 1);
+}
+
+export const muteAudio = () => {
+    muteBool = !muteBool;
+    console.log(muteBool);
 }
 
 export const stopAudio = () => {
