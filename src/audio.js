@@ -43,7 +43,6 @@ export const playAudio = (randomColor) => {
     !muteBool ? oscillatorGainNodes[addGain - 1].gain.linearRampToValueAtTime(.5, audioCtx.currentTime) : oscillatorGainNodes[addGain - 1].gain.setValueAtTime(0, audioCtx.currentTime);
     oscillatorNodes[addNode - 1].type = 'triangle';
     oscillatorNodes[addNode - 1].start(); 
-    console.log(randomColor);
     oscillatorNodes[addNode - 1].frequency.setValueAtTime(hexArray[randomColor], audioCtx.currentTime);
     
     !muteBool ? oscillatorGainNodes[addGain - 1].gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 1) : oscillatorGainNodes[addGain - 1].gain.setValueAtTime(0, audioCtx.currentTime + 1);
