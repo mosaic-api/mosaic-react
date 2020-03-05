@@ -4,6 +4,7 @@ import { getScheme, getBoards } from './mosaic-api.js';
 import BottomDrawer from './BottomDrawer.js';
 import { withRouter } from 'react-router-dom';
 import TopDrawer from './TopDrawer.js';
+import MusicDrawer from './MusicDrawer.js';
 import MosaicTitle from './MosaicTitle.js';
 import audioStart, { playAudio, stopAudio } from './audio.js';
 
@@ -103,7 +104,6 @@ export default withRouter (class GameBoard extends Component {
         let playTime = setInterval(() => {
             if (!isNaN(mapOver[CountArray[0]][CountArray[1]])) {
                 const savedNote = this.state.musicboard[CountArray[0]][CountArray[1]];
-                console.log(savedNote);
                 playAudio(savedNote);
             }
             blankBoard[CountArray[0]][CountArray[1]] = mapOver[CountArray[0]][CountArray[1]];
@@ -155,6 +155,7 @@ export default withRouter (class GameBoard extends Component {
                 <button onClick={e => this.handlePlay()}>THING</button> {/* ADDITION */}
                 <BottomDrawer id={this.state.id} currentMusic={this.state.musicboard} getSaved={this.getSaved} scheme={this.state.schemeArray} history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
                 <TopDrawer user={this.props.user}/>
+                <MusicDrawer />
             </div>
         )
     }
