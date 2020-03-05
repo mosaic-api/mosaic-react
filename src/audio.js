@@ -16,7 +16,7 @@ export const playAudio = (randomColor) => {
     const oscillator = audioCtx.createOscillator();
     const addNode = oscillatorNodes.push(oscillator);
     oscillatorNodes[addNode - 1].connect(gainNode);
-    oscillatorNodes[addNode - 1].type = 'triangle';
+    oscillatorNodes[addNode - 1].type = 'sine';
     oscillatorNodes[addNode - 1].start(); 
     oscillatorNodes[addNode - 1].frequency.setValueAtTime(hexArray[randomColor], audioCtx.currentTime);
     // gainNode.gain.setValueAtTime(.5, audioCtx.currentTime)

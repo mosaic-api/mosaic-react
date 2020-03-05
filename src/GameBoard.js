@@ -35,10 +35,12 @@ export default withRouter (class GameBoard extends Component {
                     if (userBoard.id === Number(this.props.match.params.id)) {
                         const boardParse = JSON.parse(userBoard.game_board);
                         const schemeParse = JSON.parse(userBoard.scheme);
+                        const musicParse = JSON.parse(userBoard.music_board);
                         this.setState({ 
                             gameboard: boardParse,
                             schemeArray: schemeParse,
-                            id: this.props.match.params.id
+                            id: this.props.match.params.id,
+                            musicboard: musicParse
                         });
                     }
                 })
@@ -55,24 +57,31 @@ export default withRouter (class GameBoard extends Component {
         if (!cellId.includes('cell')) return;
         
         const idArray = cellId.split('_')[1].split('-');
-        const newBoard = this.state.gameboard.slice()
-       
-        newBoard[Number(idArray[0])][Number(idArray[1])] = this.state.startColor
+        const newBoard = this.state.gameboard.slice();
+        const newMusic = this.state.musicboard.slice();
 
         const randomColor = Math.floor(Math.random() * this.state.schemeArray.length)
+       
+        newBoard[Number(idArray[0])][Number(idArray[1])] = this.state.startColor;
+        newMusic[Number(idArray[0])][Number(idArray[1])] = randomColor;
+        
         this.setState({
             startColor: this.state.schemeArray[randomColor],
-            gameboard: newBoard
+            gameboard: newBoard,
+            musicboard: newMusic
         })
         playAudio(randomColor);
     }
+
     getSaved = (state) => {
         const boardParse = JSON.parse(state.game_board);
         const schemeParse = JSON.parse(state.scheme);
+        const musicParse = JSON.parse(state.music_board);
         this.setState({ 
             gameboard: boardParse,
             schemeArray: schemeParse,
-            id: state.id
+            id: state.id,
+            musicboard: musicParse
         });
     }
 
@@ -85,18 +94,20 @@ export default withRouter (class GameBoard extends Component {
     }
 
     handlePlay = () => {
+        clearInterval(this.state.playInt)
         let CountArray = [0, 0]    
         const mapOver = this.state.gameboard;
         let blankBoard = getInitGameState();
         this.setState({ gameboard: getInitGameState() })
         let playTime = setInterval(() => {
             if (mapOver[CountArray[0]][CountArray[1]] !== "rgba(128, 128, 128, 0.199)") {
-                const randomColor = Math.floor(Math.random() * this.state.schemeArray.length)
-                playAudio(randomColor);
+                const savedNote = this.state.musicboard[CountArray[0]][CountArray[1]];
+                console.log(savedNote);
+                playAudio(savedNote);
             }
             blankBoard[CountArray[0]][CountArray[1]] = mapOver[CountArray[0]][CountArray[1]];
             this.setState({gameboard: blankBoard})
-            if (CountArray[1] < this.state.gameboard.length - 1) {
+            if (CountArray[1] < this.state.gameboard[0].length - 1) {
                 CountArray[1]++;
             } else if (CountArray[0] < this.state.gameboard.length - 1) {
                 CountArray[1] = 0;
