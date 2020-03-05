@@ -26,7 +26,8 @@ a {
 /* until we figure out switching background color across app */
 #login-parent, #gameboard-app, #userboards-app {
   /* background-color: rgb(224, 205, 205); */
-  background-image: linear-gradient(rgb(220, 220, 220), rgb(90, 90, 90))
+  /* background-image: linear-gradient(rgb(220, 220, 220), rgb(90, 90, 90)) */
+  background-image: linear-gradient(rgb(220, 220, 220), rgb(128, 125, 125))
 }
 
 /* ==========DRAWER============= */
@@ -85,12 +86,19 @@ a {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 #gameboard-container {
   width: 90%;
   height: 50%;
   margin: 0 auto;
+  position: relative;
+  left: 20px;
+  top: -5%
+}
+#gameboard-parent .title {
+  position: relative;
+  top: 20%
 }
 .row {
     display: flex;
@@ -102,9 +110,50 @@ a {
   display: inline-block; 
   width: 60px;
   height: 60px;
-  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+  /* clip-path: polygon(50% 0, 0 100%, 100% 100%); */
+  position: relative;
+  left: -20px;
+
   /* filter: drop-shadow(37px 10px 4px #4444dd) */
 }
+
+/* facing down   clip-path: polygon(50% 100%, 0 0, 100% 0); */
+.cell:nth-child(odd) {
+  /* clip-path: polygon(50% 100%, 0 0, 100% 0); */
+  position: relative;
+  z-index: 2;
+  margin-left: -30px;
+  margin-right: -30px;
+}
+/* facing up   clip-path: polygon(50% 0, 0 100%, 100% 100%); */
+.cell:nth-child(even) {
+  position: relative;
+  z-index: 1;
+}
+
+.row:nth-child(odd) .cell:nth-child(odd){
+  position: relative;
+  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+}
+.row:nth-child(odd) .cell:nth-child(even){
+  position: relative;
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+}
+.row:nth-child(even) .cell:nth-child(odd){
+  position: relative;
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+
+}
+.row:nth-child(even) .cell:nth-child(even){
+  position: relative;
+  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+
+}
+/* .row:nth-child(odd) {
+  position: relative;
+  left: -30px;
+} */
+
 #tile-preview {
   box-shadow: inset 0 0 20px 5px rgba(255, 255, 255, 0.3);
   border-radius: 50%;

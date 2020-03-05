@@ -1,5 +1,5 @@
-const maxRows = 5;
-const maxColumns = 5;
+const maxRows = 6;
+const maxColumns = 11;
 
 
 export function getInitGameState() {
