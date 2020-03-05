@@ -104,7 +104,7 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
               <MenuItem value="quad">Quad</MenuItem>
           </Select>
       </FormControl>
-      <Button variant="contained" size="small" color="secondary" onClick={e => handleSave()} startIcon={<AddCircleIcon/>}>Save Mosaic</Button>
+      <Button variant="contained" size="small" color="secondary" disabled={user ? false : true} onClick={e => handleSave()} startIcon={<AddCircleIcon/>}>{user ? 'Save Mosaic': 'Must Login'}</Button>
     </div>
   );
 

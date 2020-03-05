@@ -10,7 +10,11 @@ export function getInitGameState() {
         gameState.push([]);
         //make null placeholder for each cell in grid
         for (let j = 0; j < maxColumns; j++) {
-            gameState[i].push('rgba(128, 128, 128, 0.199)');
+            if (j % 2 === 0) {
+                gameState[i].push('rgba(140, 140, 140, 0.2)');
+            } else {
+                gameState[i].push('rgba(120, 120, 120, 0.2)')
+            }
         }
     } 
     return gameState
