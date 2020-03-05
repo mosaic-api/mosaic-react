@@ -60,6 +60,15 @@ export default withRouter (class GameBoard extends Component {
             gameboard: newBoard
         })
     }
+    getSaved = (state) => {
+        const boardParse = JSON.parse(state.game_board);
+        const schemeParse = JSON.parse(state.scheme);
+        this.setState({ 
+            gameboard: boardParse,
+            schemeArray: schemeParse,
+            id: state.id
+        });
+    }
 
     handleChangeScheme = async (e) =>  {
         const schemeArray = await getScheme(this.state.startColor, e.target.value)
@@ -94,7 +103,7 @@ export default withRouter (class GameBoard extends Component {
                         </div>
                     </div>
                 </div>
-                <BottomDrawer id={this.state.id} currentMode={this.state.mode} scheme={this.state.schemeArray} history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
+                <BottomDrawer id={this.state.id} currentMode={this.state.mode} getSaved={this.getSaved} scheme={this.state.schemeArray} history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
             </div>
         )
     }

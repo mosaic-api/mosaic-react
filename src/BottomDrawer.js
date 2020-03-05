@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState, user, colorName, scheme, currentMode, id}) {
+export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState, user, colorName, scheme, currentMode, id, getSaved}) {
   const classes = useStyles();
 
   const [state, setState] = React.useState({
@@ -53,7 +53,8 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
         scheme: stringyScheme,
         mode: currentMode
       }
-      await saveBoard(gameObject, user);
+      const saved = await saveBoard(gameObject, user);
+      getSaved(saved.body)
     } else {
       const gameObject = {
         game_board: stringyState,
