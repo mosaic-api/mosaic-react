@@ -140,7 +140,6 @@ export default withRouter (class GameBoard extends Component {
         return (
 
             <div style={background} id="gameboard-app">
-                <TopDrawer user={this.props.user}/>
                 <div id="gameboard-parent">
                     
                     <MosaicTitle schemeArray={this.state.schemeArray} />
