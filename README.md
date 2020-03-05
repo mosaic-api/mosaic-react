@@ -69,20 +69,16 @@ const URL = 'https://mosaic-node-db.herokuapp.com/api'
       return await request.post(`${URL}/auth/signup`, user)
     }
     export async function saveBoard(stateObject, user) {
-      const userCheck = (!user) ? JSON.parse(localStorage.getItem('user')) : user
-      return await request.post(`${URL}/user/saved`, stateObject).set('Authorization', userCheck.token)
+      return await request.post(`${URL}/user/saved`, stateObject).set('Authorization', user.token)
     }
     export async function updateBoard(stateObject, user, id) {
-      const userCheck = (!user) ? JSON.parse(localStorage.getItem('user')) : user
-      return await request.put(`${URL}/user/saved/${id}`, stateObject).set('Authorization', userCheck.token)
+      return await request.put(`${URL}/user/saved/${id}`, stateObject).set('Authorization', user.token)
     }
     export async function getBoards(user) {
-      const userCheck = (!user) ? JSON.parse(localStorage.getItem('user')) : user
       return await request.get(`${URL}/user/saved`).set('Authorization', userCheck.token)
     }
     export async function deleteBoard(id, user) {
-      const userCheck = (!user) ? JSON.parse(localStorage.getItem('user')) : user
-      return await request.delete(`${URL}/user/saved/${id}`).set('Authorization', userCheck.token)
+      return await request.delete(`${URL}/user/saved/${id}`).set('Authorization', user.token)
     }
 ```
 

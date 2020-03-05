@@ -24,9 +24,13 @@ export default class UserBoards extends Component {
     render() {
         const boardNodes = this.state.boardsArray.map(board => {
             return <div>
-                <Link to={`/gameboard/${board.id}`}> {board.board_name} </Link>
-                <DeleteOutlineIcon onClick={e => this.handleDelete(board.id)}/>        
+                <div className="board-links">
+                    <Link to={`/gameboard/${board.id}`}> {board.board_name} </Link>
+                    <DeleteOutlineIcon onClick={e => this.handleDelete(board.id)}/> 
                 </div>
+                <hr />       
+
+            </div>
                 
         })
         return (
