@@ -4,12 +4,11 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import { Select, InputLabel, MenuItem } from '@material-ui/core';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { saveBoard, updateBoard } from './mosaic-api';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-
+import SaveIcon from '@material-ui/icons/Save';
 
 function Alert(props) {
   return <MuiAlert elevation={10} variant="filled" {...props} />;
@@ -104,7 +103,7 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
               <MenuItem value="quad">Quad</MenuItem>
           </Select>
       </FormControl>
-      <Button variant="contained" size="small" color="secondary" disabled={user ? false : true} onClick={e => handleSave()} startIcon={<AddCircleIcon/>}>{user ? 'Save Mosaic': 'Must Login'}</Button>
+      <Button variant="contained" size="small" color="secondary" disabled={user ? false : true} onClick={e => handleSave()} startIcon={<SaveIcon/>}>{user ? 'Save Mosaic': 'Must Login'}</Button>
     </div>
   );
 
