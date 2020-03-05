@@ -5,7 +5,7 @@ import BottomDrawer from './BottomDrawer.js';
 import { withRouter } from 'react-router-dom';
 import TopDrawer from './TopDrawer.js';
 import MosaicTitle from './MosaicTitle.js';
-import audioStart, { playAudio, stopAudio } from './audio.js'; //ADDITION
+import audioStart, { playAudio, stopAudio } from './audio.js';
 
 
 export default withRouter (class GameBoard extends Component {
@@ -15,7 +15,8 @@ export default withRouter (class GameBoard extends Component {
         schemeArray: [],
         mode: "analogic-complement",
         id: null,
-        playInt: null
+        playInt: null,
+        musicboard: getInitGameState()
     }
 
     componentDidMount = async () => {
@@ -23,7 +24,8 @@ export default withRouter (class GameBoard extends Component {
         this.setState({
             schemeArray: schemeArray,
             gameboard: getInitGameState(), 
-            startColor: this.props.startColor
+            startColor: this.props.startColor,
+            musicboard: getInitGameState()
         })
 
         if (this.props.match.params.id) {
@@ -82,12 +84,16 @@ export default withRouter (class GameBoard extends Component {
         })
     }
 
-    handlePlay = () => { //ADDITION
+    handlePlay = () => {
         let CountArray = [0, 0]    
         const mapOver = this.state.gameboard;
         let blankBoard = getInitGameState();
         this.setState({ gameboard: getInitGameState() })
         let playTime = setInterval(() => {
+            if (mapOver[CountArray[0]][CountArray[1]] !== "rgba(128, 128, 128, 0.199)") {
+                const randomColor = Math.floor(Math.random() * this.state.schemeArray.length)
+                playAudio(randomColor);
+            }
             blankBoard[CountArray[0]][CountArray[1]] = mapOver[CountArray[0]][CountArray[1]];
             this.setState({gameboard: blankBoard})
             if (CountArray[1] < this.state.gameboard.length - 1) {
@@ -100,10 +106,10 @@ export default withRouter (class GameBoard extends Component {
                 clearInterval(this.state.playInt);
             }
         }, 250);
-        this.setState({ playInt: playTime})
+        this.setState({ playInt: playTime})    
     }
 
-    componentWillUnmount() { //ADDITION
+    componentWillUnmount() {
         stopAudio();
         clearInterval(this.state.playInt)
     }
@@ -134,7 +140,7 @@ export default withRouter (class GameBoard extends Component {
                     </div>
                 </div>
                 <button onClick={e => this.handlePlay()}>THING</button> {/* ADDITION */}
-                <BottomDrawer id={this.state.id} currentMode={this.state.mode} getSaved={this.getSaved} scheme={this.state.schemeArray} history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
+                <BottomDrawer id={this.state.id} currentMusic={this.state.musicboard} getSaved={this.getSaved} scheme={this.state.schemeArray} history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
             </div>
         )
     }

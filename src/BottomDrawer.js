@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState, user, colorName, scheme, currentMode, id, getSaved}) {
+export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState, user, colorName, scheme, currentMusic, id, getSaved}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -58,12 +58,13 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
   const handleSave = async() => {
     const stringyState = JSON.stringify(gameState)
     const stringyScheme = JSON.stringify(scheme)
+    const stringyMusicBoard = JSON.stringify(currentMusic)
     if (!id){
       const gameObject = {
         board_name: colorName,
         game_board: stringyState,
         scheme: stringyScheme,
-        mode: currentMode
+        music_board: stringyMusicBoard
       }
       const saved = await saveBoard(gameObject, user);
       getSaved(saved.body)
@@ -71,7 +72,7 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
       const gameObject = {
         game_board: stringyState,
         scheme: stringyScheme,
-        mode: currentMode
+        music_board: stringyMusicBoard
       }
       await updateBoard(gameObject, user, id)
     }
