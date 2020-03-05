@@ -26,7 +26,7 @@ export default withRouter (class AboutUs extends Component {
                 <div id="chris">
                     <h2>Chris</h2>
                     <img src='https://images-na.ssl-images-amazon.com/images/I/61FahidyQUL.jpg' alt='Chris'></img>                   
-                    <p>How you Relax: Death Metal 🤘</p>
+                    <p>How you Relax: Death Metal <span role="img" aria-label="rock">🤘</span></p>
                     <p>Ideal Vacation: Nashville, TN</p>
                 </div>
                 <div id="joe">
