@@ -7,9 +7,20 @@ import { Select, InputLabel, MenuItem } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { saveBoard, updateBoard } from './mosaic-api';
 import SettingsIcon from '@material-ui/icons/Settings';
-// import SaveAlert from 'SaveAlert.js';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
+
+function Alert(props) {
+  return <MuiAlert elevation={10} variant="filled" {...props} />;
+}
 const useStyles = makeStyles(theme => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
   list: {
     width: 250,
   },
@@ -24,6 +35,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState, user, colorName, scheme, currentMode, id, getSaved}) {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
 
   const [state, setState] = React.useState({
     top: false,
@@ -63,7 +75,14 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
       }
       await updateBoard(gameObject, user, id)
     }
+    setOpen(true);
   }
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
   
   const fullList = side => (
     <div className={classes.fullList} id="bottom-drawer-contents" role="presentation" onClick={toggleDrawer(side, false)} onKeyDown={toggleDrawer(side, false)}>
@@ -89,10 +108,16 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
   );
 
   return (
-    <div>
+    <div className={classes.root}>
       <Button onClick={toggleDrawer('bottom', true)} size="large" startIcon={<SettingsIcon/>}></Button>
 
       <SwipeableDrawer anchor="bottom" open={state.bottom} onClose={toggleDrawer('bottom', false)} onOpen={toggleDrawer('bottom', true)}>{fullList('bottom')}</SwipeableDrawer>
+
+      <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          Saved!
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

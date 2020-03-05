@@ -13,6 +13,7 @@ a {
   text-align: center;
   height: 100vh;
   padding: 0;
+
 }
 .title {
   color: whitesmoke;
@@ -48,6 +49,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: 1.5s;
 }
 #landing-container {
   display: flex;
