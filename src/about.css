@@ -1,0 +1,61 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0
+}
+
+
+/* container that holds all */
+#containerDiv {
+  height: 89vh;
+
+}
+
+/* div of each person */
+#scott {
+  background-color: #374066;
+  color: white;
+  height: 25%;
+}
+
+#joe {
+  background-color: #0309A2;
+  color: white;
+  height: 25%;
+
+}
+
+#chris {
+  background-color: #66D308;
+  color: black;
+  height: 25%;
+
+}
+
+#cody {
+  background-color: white;
+  color: black;
+  height: 25%;
+
+}
+
+/* our pics */
+img {
+  height: 50%;
+}
+
+/* our info */
+h2 {
+  font-family: 'Dancing Script', cursive;
+}
+
+p {
+  font-family: 'Caladea', serif;
+  
+}
+
+#upperDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
