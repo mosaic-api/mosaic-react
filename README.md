@@ -1,68 +1,104 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Mosaic
 
-## Available Scripts
+## Chris, Cody, Joe, and Scott
 
-In the project directory, you can run:
+### It's a F@#cking Relaxtion Color App, just....just play it
 
-### `npm start`
+### Problem Domain: Stress in a stressfull world! Don't you just wanna set aside your worries and take the edge off modern life?? Well there are drugs for that, but in the meantime there is ... Mosaic :)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Version 1.0.0 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Front End Dependencies: 
+```
+{
+    "@material-ui/core": "^4.9.5",
+    "@material-ui/icons": "^4.9.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.1",
+    "@testing-library/user-event": "^7.2.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.0",
+    "react-test-renderer": "^16.13.0",
+    "superagent": "^5.2.2"
+  },
+```
+### Back End Dependencies:
+```
+{
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jest": "^25.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.9.1",
+    "pg": "^7.12.1",
+    "string-hash": "^1.1.3",
+    "superagent": "^5.1.0",
+    "supertest": "^4.0.2"
+  },
+```
+### To Play click: https://the-mosaic.herokuapp.com/
 
-### `npm test`
+### API Endpoints: 
+```
+    export async function getRandomColor() {
+        const generateHex = Math.floor(Math.random()*16777215).toString(16);
+        return await request.get(`https://www.thecolorapi.com/id?hex=${generateHex}`);
+    }
+    export async function getScheme(hex, mode) {
+      const cleanHex = hex.slice(1)
+      const schemeData = await request.get(`https://www.thecolorapi.com/scheme?hex=${cleanHex}&mode=${mode}&count=6`);
+      return schemeData.body.colors.map(color => color.hex.value)
+    }
+```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### BackEnd Endpoints:
+```
+const URL = 'https://mosaic-node-db.herokuapp.com/api'
 
-### `npm run build`
+    export async function signin(user) {
+      return await request.post(`${URL}/auth/signin`, user)
+    }
+    export async function signup(user) {
+      return await request.post(`${URL}/auth/signup`, user)
+    }
+    export async function saveBoard(stateObject, user) {
+      const userCheck = (!user) ? JSON.parse(localStorage.getItem('user')) : user
+      return await request.post(`${URL}/user/saved`, stateObject).set('Authorization', userCheck.token)
+    }
+    export async function updateBoard(stateObject, user, id) {
+      const userCheck = (!user) ? JSON.parse(localStorage.getItem('user')) : user
+      return await request.put(`${URL}/user/saved/${id}`, stateObject).set('Authorization', userCheck.token)
+    }
+    export async function getBoards(user) {
+      const userCheck = (!user) ? JSON.parse(localStorage.getItem('user')) : user
+      return await request.get(`${URL}/user/saved`).set('Authorization', userCheck.token)
+    }
+    export async function deleteBoard(id, user) {
+      const userCheck = (!user) ? JSON.parse(localStorage.getItem('user')) : user
+      return await request.delete(`${URL}/user/saved/${id}`).set('Authorization', userCheck.token)
+    }
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Boards Database structure
+![BoardsDB](./public/Boards-DB-ScreenShot.png "boards database")
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Users Database structure
+![UsersDB](./public\Users-DB-ScreenShot.png "users database")
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## MIT License
+### Copyright 2020 The Mosaic
 
-### `npm run eject`
+##### Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+##### The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+##### THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
