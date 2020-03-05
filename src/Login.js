@@ -26,7 +26,7 @@ export default class Login extends Component {
         try{
             const userData = await signin(user)
             this.props.setUser(userData.body)
-            localStorage.setItem('user', JSON.stringify(userData.body))
+           
             this.props.history.push('/')
         } catch (err) {
             alert(err)
@@ -42,7 +42,7 @@ export default class Login extends Component {
         try{
             const userData = await signup(user)
             this.props.setUser(userData.body)
-            localStorage.setItem('user', JSON.stringify(userData.body))
+           
             this.props.history.push('/')
         } catch (err) {
             alert(err)

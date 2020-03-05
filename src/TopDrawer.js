@@ -17,10 +17,9 @@ const useStyles = makeStyles({
     width: 'auto',
   },
 });
-const storedUser = JSON.parse(localStorage.getItem('user'));
 
 const SwipeableTemporaryDrawer = withRouter(({history, user}) => {
-  const realUser = user ? user : storedUser;
+  const realUser = user 
 
 
   const classes = useStyles();
@@ -43,7 +42,6 @@ const SwipeableTemporaryDrawer = withRouter(({history, user}) => {
   const handleMyBoards = () => history.push('/userboards');
   const handleLoginButton = () => history.push('/login');
   const handleLogoutButton = () => {
-    localStorage.clear();
     history.push('/login');
   };
 
