@@ -105,7 +105,7 @@ export default withRouter (class GameBoard extends Component {
         let blankBoard = getInitGameState();
         this.setState({ gameboard: getInitGameState() })
         let playTime = setInterval(() => {
-            if (!isNaN(mapOver[CountArray[0]][CountArray[1]])) {
+            if (!isNaN(this.state.musicboard[CountArray[0]][CountArray[1]])) {
                 const savedNote = this.state.musicboard[CountArray[0]][CountArray[1]];
                 playAudio(savedNote);
             }
@@ -156,8 +156,9 @@ export default withRouter (class GameBoard extends Component {
                 </div>
                 <button onClick={e => this.handlePlay()}>THING</button> {/* ADDITION */}
                 <BottomDrawer id={this.state.id} currentMusic={this.state.musicboard} getSaved={this.getSaved} scheme={this.state.schemeArray} history={this.props.history} colorName={this.state.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
-                {/* <MusicDrawer /> */}
-                <TopDrawer user={this.props.user}/>            
+                <MusicDrawer play={this.handlePlay}/>
+                <TopDrawer user={this.props.user}/>
+                
             </div>
         )
     }

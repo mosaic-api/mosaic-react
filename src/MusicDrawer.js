@@ -3,11 +3,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router-dom'
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import MusicVideoIcon from '@material-ui/icons/MusicVideo';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import MusicOffIcon from '@material-ui/icons/MusicOff';
+import PlayArrowOutlinedIcon from '@material-ui/icons/PlayArrowOutlined';
+import StopOutlinedIcon from '@material-ui/icons/StopOutlined';
+
+import Slider from '@material-ui/core/Slider';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   list: {
@@ -19,7 +22,7 @@ const useStyles = makeStyles({
 });
 // const storedUser = JSON.parse(localStorage.getItem('user'));
 
-const SwipeableTemporaryDrawer = withRouter(({history, isMuted}) => {
+const SwipeableTemporaryDrawer = withRouter(({history, isMuted, play}) => {
 //   const realUser = user ? user : storedUser;
 
 
@@ -33,7 +36,7 @@ const SwipeableTemporaryDrawer = withRouter(({history, isMuted}) => {
     logBool: true,
   });
 
-  const [value, setValue] = React.useState(30);
+//   const [value, setValue] = React.useState(30);
 
   const toggleDrawer = (side, open) => event => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -67,9 +70,15 @@ const SwipeableTemporaryDrawer = withRouter(({history, isMuted}) => {
       
 
       {button()}
-      <Button variant="contained" size="small" color="primary" onClick={e => history.push('/')} startIcon={<SubscriptionsIcon/>}>My Mosaics</Button>
-      <Button variant="contained" size="small" color="primary" onClick={e => history.push('/')} startIcon={<AddCircleIcon/>}>New Mosaic</Button>  
-    </div>
+      <Button variant="contained" size="small" color="primary" onClick={e => play()} startIcon={<PlayArrowOutlinedIcon/>}>Play</Button>
+      <Button variant="contained" size="small" color="primary" onClick={e => history.push('/')} startIcon={<StopOutlinedIcon/>}>Stop</Button>
+          <div id="music-slider">
+              <Typography id="input-slider" gutterBottom>
+                  Speed
+              </Typography>
+              <Slider id="music-slider" defaultValue={30} aria-labelledby="discrete-slider" step={1} min={10} max={110} />
+          </div>
+      </div>
   );
 
   return (
