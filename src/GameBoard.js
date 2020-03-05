@@ -15,7 +15,8 @@ export default withRouter (class GameBoard extends Component {
         schemeArray: [],
         mode: "analogic-complement",
         id: null,
-        playInt: null
+        playInt: null,
+        musicboard: getInitGameState()
     }
 
     componentDidMount = async () => {
@@ -23,7 +24,8 @@ export default withRouter (class GameBoard extends Component {
         this.setState({
             schemeArray: schemeArray,
             gameboard: getInitGameState(), 
-            startColor: this.props.startColor
+            startColor: this.props.startColor,
+            musicboard: getInitGameState()
         })
 
         if (this.props.match.params.id) {
@@ -138,7 +140,7 @@ export default withRouter (class GameBoard extends Component {
                     </div>
                 </div>
                 <button onClick={e => this.handlePlay()}>THING</button> {/* ADDITION */}
-                <BottomDrawer id={this.state.id} currentMode={this.state.mode} getSaved={this.getSaved} scheme={this.state.schemeArray} history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
+                <BottomDrawer id={this.state.id} currentMusic={this.state.musicboard} getSaved={this.getSaved} scheme={this.state.schemeArray} history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
             </div>
         )
     }
