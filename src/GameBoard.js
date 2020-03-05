@@ -18,7 +18,9 @@ export default withRouter (class GameBoard extends Component {
         id: null,
         playInt: null,
         musicboard: getInitGameState(),
-        colorName: null
+        colorName: null,
+        playbackMap: getInitGameState(),
+        isPlaying: false
     }
 
     componentDidMount = async () => {
@@ -99,11 +101,16 @@ export default withRouter (class GameBoard extends Component {
     }
 
     handlePlay = () => {
-        clearInterval(this.state.playInt)
+        clearInterval(this.state.playInt);
+
         let CountArray = [0, 0]    
         const mapOver = this.state.gameboard;
         let blankBoard = getInitGameState();
-        this.setState({ gameboard: getInitGameState() })
+        this.setState({ 
+            gameboard: getInitGameState(),
+            playbackMap: mapOver,
+            isPlaying: true
+        })
         let playTime = setInterval(() => {
             if (!isNaN(this.state.musicboard[CountArray[0]][CountArray[1]])) {
                 const savedNote = this.state.musicboard[CountArray[0]][CountArray[1]];
@@ -122,6 +129,14 @@ export default withRouter (class GameBoard extends Component {
             }
         }, 500);
         this.setState({ playInt: playTime})    
+    }
+
+    handleStop = () => {
+        clearInterval(this.state.playInt)
+        this.setState({ 
+            gameboard: this.state.playbackMap,
+            isPlaying: false
+        })
     }
 
     componentWillUnmount() {
@@ -154,9 +169,8 @@ export default withRouter (class GameBoard extends Component {
                         </div>
                     </div>
                 </div>
-                <button onClick={e => this.handlePlay()}>THING</button> {/* ADDITION */}
                 <BottomDrawer id={this.state.id} currentMusic={this.state.musicboard} getSaved={this.getSaved} scheme={this.state.schemeArray} history={this.props.history} colorName={this.state.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
-                <MusicDrawer play={this.handlePlay}/>
+                <MusicDrawer play={this.handlePlay} stop={this.handleStop} isPlaying={this.state.isPlaying}/>
                 <TopDrawer user={this.props.user}/>
                 
             </div>

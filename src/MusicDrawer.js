@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 });
 // const storedUser = JSON.parse(localStorage.getItem('user'));
 
-const SwipeableTemporaryDrawer = withRouter(({history, isMuted, play}) => {
+const SwipeableTemporaryDrawer = withRouter(({history, isMuted, play, stop, isPlaying}) => {
 //   const realUser = user ? user : storedUser;
 
 
@@ -70,8 +70,8 @@ const SwipeableTemporaryDrawer = withRouter(({history, isMuted, play}) => {
       
 
       {button()}
-      <Button variant="contained" size="small" color="primary" onClick={e => play()} startIcon={<PlayArrowOutlinedIcon/>}>Play</Button>
-      <Button variant="contained" size="small" color="primary" onClick={e => history.push('/')} startIcon={<StopOutlinedIcon/>}>Stop</Button>
+      <Button variant="contained" size="small" color="primary" onClick={e => play()} startIcon={<PlayArrowOutlinedIcon/>} disabled={isPlaying}>Play</Button>
+      <Button variant="contained" size="small" color="primary" onClick={e => stop()} startIcon={<StopOutlinedIcon/>}>Stop</Button>
           <div id="music-slider">
               <Typography id="input-slider" gutterBottom>
                   Speed
