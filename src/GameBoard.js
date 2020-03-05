@@ -5,7 +5,7 @@ import BottomDrawer from './BottomDrawer.js';
 import { withRouter } from 'react-router-dom';
 import TopDrawer from './TopDrawer.js';
 import MosaicTitle from './MosaicTitle.js';
-import audioStart, { playAudio, stopAudio } from './audio.js'; //ADDITION
+import audioStart, { playAudio, stopAudio } from './audio.js';
 
 
 export default withRouter (class GameBoard extends Component {
@@ -82,12 +82,16 @@ export default withRouter (class GameBoard extends Component {
         })
     }
 
-    handlePlay = () => { //ADDITION
+    handlePlay = () => {
         let CountArray = [0, 0]    
         const mapOver = this.state.gameboard;
         let blankBoard = getInitGameState();
         this.setState({ gameboard: getInitGameState() })
         let playTime = setInterval(() => {
+            if (mapOver[CountArray[0]][CountArray[1]] !== "rgba(128, 128, 128, 0.199)") {
+                const randomColor = Math.floor(Math.random() * this.state.schemeArray.length)
+                playAudio(randomColor);
+            }
             blankBoard[CountArray[0]][CountArray[1]] = mapOver[CountArray[0]][CountArray[1]];
             this.setState({gameboard: blankBoard})
             if (CountArray[1] < this.state.gameboard.length - 1) {
@@ -100,10 +104,10 @@ export default withRouter (class GameBoard extends Component {
                 clearInterval(this.state.playInt);
             }
         }, 250);
-        this.setState({ playInt: playTime})
+        this.setState({ playInt: playTime})    
     }
 
-    componentWillUnmount() { //ADDITION
+    componentWillUnmount() {
         stopAudio();
         clearInterval(this.state.playInt)
     }
