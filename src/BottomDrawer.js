@@ -110,7 +110,7 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
 
   return (
     <div className={classes.root}>
-      <Button onClick={toggleDrawer('bottom', true)} size="large" startIcon={<SettingsIcon/>}></Button>
+      <Button id="bottomDrawerButton" onClick={toggleDrawer('bottom', true)} size="large" startIcon={<SettingsIcon/>}></Button>
 
       <SwipeableDrawer anchor="bottom" open={state.bottom} onClose={toggleDrawer('bottom', false)} onOpen={toggleDrawer('bottom', true)}>{fullList('bottom')}</SwipeableDrawer>
 

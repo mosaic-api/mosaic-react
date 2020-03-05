@@ -67,9 +67,9 @@ const SwipeableTemporaryDrawer = withRouter(({history, user}) => {
 
   return (
     <div id="top-drawer-div">
-      <Button onClick={toggleDrawer('top', true)} size="large" startIcon={<AppsIcon/>}></Button>
+      <Button  onClick={toggleDrawer('top', true)} size="large" startIcon={<AppsIcon/>}></Button>
       
-      <SwipeableDrawer anchor="top" open={state.top} onClose={toggleDrawer('top', false)} onOpen={toggleDrawer('top', true)}>{fullList('top')}</SwipeableDrawer>
+      <SwipeableDrawer anchor="bottom" open={state.top} onClose={toggleDrawer('top', false)} onOpen={toggleDrawer('top', true)}>{fullList('top')}</SwipeableDrawer>
     </div>
   );
 })

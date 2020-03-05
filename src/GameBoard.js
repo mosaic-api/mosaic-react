@@ -126,7 +126,6 @@ export default withRouter (class GameBoard extends Component {
      
         return (
             <div id="gameboard-app">
-                <TopDrawer user={this.props.user}/>
                 <div id="gameboard-parent">
                     
                     <MosaicTitle schemeArray={this.state.schemeArray} />
@@ -141,6 +140,7 @@ export default withRouter (class GameBoard extends Component {
                 </div>
                 <button onClick={e => this.handlePlay()}>THING</button> {/* ADDITION */}
                 <BottomDrawer id={this.state.id} currentMusic={this.state.musicboard} getSaved={this.getSaved} scheme={this.state.schemeArray} history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.state.gameboard} user={this.props.user}></BottomDrawer>
+                <TopDrawer user={this.props.user}/>
             </div>
         )
     }

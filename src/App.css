@@ -201,3 +201,10 @@ a {
 }
 
 /* ===============USERBOARDS============ */
+
+/* ==============Drawer Buttons================== */
+#bottomDrawerButton {
+  position: absolute;
+  right: 15%
+}
+/* ==============Drawer Buttons================== */
