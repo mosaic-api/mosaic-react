@@ -132,8 +132,12 @@ export default withRouter (class GameBoard extends Component {
                 this.props.setAppState({ isPlaying: false}); 
                 clearInterval(this.props.playInt);
             }
-        }, 500);
+        }, this.props.playbackSpeed);
         this.props.setAppState({ playInt: playTime});  
+    }
+
+    handlePlaybackSpeed = (newSpeed) => {
+        this.props.setAppState({ playbackSpeed: newSpeed});  
     }
 
     handleStop = () => {
@@ -155,10 +159,9 @@ export default withRouter (class GameBoard extends Component {
        
         const rowNodes = getInitGameState().map((rows, i) => {
             const cellNodes = getInitGameState()[0].map((cell, j) => {
-                return <div className="cell" style={{backgroundColor: this.props.gameboard[i][j]}} id={`cell_${i}-${j}`}></div>
+                return <div className="cell" key={`cellKey_${i}-${j}`}style={{backgroundColor: this.props.gameboard[i][j]}} id={`cell_${i}-${j}`}></div>
             })
-
-            return (<div className="row" id={`row_${i}`}>{cellNodes}</div>)
+            return (<div className="row" key={`rowKey_${i}`}id={`row_${i}`}>{cellNodes}</div>)
         })
     
         const background = {backgroundColor: this.props.bgColor}
@@ -179,7 +182,7 @@ export default withRouter (class GameBoard extends Component {
 
             
                 <BottomDrawer id={this.props.id} currentMusic={this.props.musicboard} getSaved={() => this.getSaved} scheme={this.props.schemeArray} history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.props.gameboard} user={this.props.user}></BottomDrawer>
-                <MusicDrawer play={this.handlePlay} stop={this.handleStop} isPlaying={this.props.isPlaying}/>
+                <MusicDrawer play={this.handlePlay} stop={this.handleStop} isPlaying={this.props.isPlaying} playbackSpeed={this.props.playbackSpeed} handlePlaybackSpeed={this.handlePlaybackSpeed}/>
                 <TopDrawer user={this.props.user}/>
 
             </div>

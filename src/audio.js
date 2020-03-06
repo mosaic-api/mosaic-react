@@ -49,13 +49,12 @@ export const playAudio = (randomColor) => {
     oscillatorNodes[addNode - 1].stop(audioCtx.currentTime + 1);
 }
 
-export const muteAudio = () => {
-    muteBool = !muteBool;
-    console.log(muteBool);
-}
-
 export const stopAudio = () => {
     audioCtx.suspend();   
+}
+
+export const muteAudio = () => {
+    muteBool = !muteBool;
 }
 
 export default audioStart;
