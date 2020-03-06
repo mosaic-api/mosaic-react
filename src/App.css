@@ -34,13 +34,20 @@ a {
 
 /* ==========DRAWER============= */
 #top-drawer-contents, #bottom-drawer-contents {
- 
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 
   padding: 8px 8px;
   background-color: rgba(255, 127, 80, 0.5);
+}
+#name-log {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+#name-log em {
+  margin-right: 5px;
 }
 
 #music-drawer-contents {

@@ -46,7 +46,7 @@ const SwipeableTemporaryDrawer = withRouter(({history, user}) => {
   };
 
   const button = () => (!realUser) ? 
-    <Button variant="contained" size="small" color="secondary" onClick={e => handleLoginButton()} startIcon={<AccountCircleIcon/>}>Login</Button> : <div>
+    <Button variant="contained" size="small" color="secondary" onClick={e => handleLoginButton()} startIcon={<AccountCircleIcon/>}>Login</Button> : <div id="name-log">
     <em>{realUser.name}</em>
     <Button variant="contained" size="small" color="secondary" onClick={e => handleLogoutButton()} startIcon={<AccountCircleIcon/>}>Logout</Button>
   </div>
