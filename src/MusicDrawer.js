@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-const SwipeableTemporaryDrawer = withRouter(({history, isMuted, play, stop, isPlaying, playbackSpeed, handlePlaybackSpeed}) => {
+const SwipeableTemporaryDrawer = withRouter(({history, isMuted, handleMute, play, stop, isPlaying, playbackSpeed, handlePlaybackSpeed}) => {
 
 
   const classes = useStyles();
@@ -44,13 +44,13 @@ const SwipeableTemporaryDrawer = withRouter(({history, isMuted, play, stop, isPl
     setState({ ...state, [side]: open });
   };
 
-  const handleMute = () => {
-      console.log('MUTE!')
+  const handleMuteChange = () => {
+      handleMute()
   }
 
   const button = () => (!isMuted) ? 
-    <Button variant="contained" size="small" color="secondary" onClick={e => handleMute()} startIcon={<MusicNoteIcon/>}>Mute</Button> :
-    <Button variant="contained" size="small" color="secondary" onClick={e => handleMute()} startIcon={<MusicOffIcon/>}>Unmute</Button>;
+    <Button variant="contained" size="small" color="secondary" onClick={e => handleMuteChange()} startIcon={<MusicNoteIcon/>}>Mute</Button> :
+    <Button variant="contained" size="small" color="secondary" onClick={e => handleMuteChange()} startIcon={<MusicOffIcon/>}>Unmute</Button>;
 
   const fullList = side => (
     <div className={classes.fullList} id="music-drawer-contents" role="presentation" onClick={toggleDrawer(side, false)} onKeyDown={toggleDrawer(side, false)}>

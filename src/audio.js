@@ -2,7 +2,7 @@
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 let oscillatorNodes = [];
 let oscillatorGainNodes = [];
-let muteBool = false;
+let muteBool = true;
 const hexArray = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00];
 // const hexArray = [523.25, 587.33, 659.25, 698.46, 783.99, 880.00];
 
@@ -45,13 +45,13 @@ export const playAudio = (randomColor) => {
     oscillatorGainNodes[addGain - 1].connect(convolverEffect);
 
     // set start of note
-    !muteBool ? oscillatorGainNodes[addGain - 1].gain.linearRampToValueAtTime(.5, audioCtx.currentTime) : oscillatorGainNodes[addGain - 1].gain.setValueAtTime(0, audioCtx.currentTime);
+    muteBool ? oscillatorGainNodes[addGain - 1].gain.linearRampToValueAtTime(.5, audioCtx.currentTime) : oscillatorGainNodes[addGain - 1].gain.setValueAtTime(0, audioCtx.currentTime);
     oscillatorNodes[addNode - 1].type = 'triangle';
     oscillatorNodes[addNode - 1].start(); 
     oscillatorNodes[addNode - 1].frequency.setValueAtTime(hexArray[randomColor], audioCtx.currentTime);
     
     // set end of note
-    !muteBool ? oscillatorGainNodes[addGain - 1].gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 1) : oscillatorGainNodes[addGain - 1].gain.setValueAtTime(0, audioCtx.currentTime + 1);
+    muteBool ? oscillatorGainNodes[addGain - 1].gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 1) : oscillatorGainNodes[addGain - 1].gain.setValueAtTime(0, audioCtx.currentTime + 1);
     oscillatorNodes[addNode - 1].stop(audioCtx.currentTime + 1);
 }
 
@@ -61,8 +61,8 @@ export const stopAudio = () => {
 }
 
 // bool for muting audio
-export const muteAudio = () => {
-    muteBool = !muteBool;
+export const muteAudio = (muteFromGame) => {
+    muteBool = muteFromGame;
 }
 
 export default audioStart;

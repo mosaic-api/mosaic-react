@@ -5,7 +5,7 @@ import BottomDrawer from './BottomDrawer.js';
 import { withRouter } from 'react-router-dom';
 import TopDrawer from './TopDrawer.js';
 import MosaicTitle from './MosaicTitle.js';
-import audioStart, { playAudio, stopAudio } from './audio.js';
+import audioStart, { playAudio, stopAudio, muteAudio } from './audio.js';
 import MusicDrawer from './MusicDrawer.js';
 import { getInitPlaybackState } from './helper.js';
 
@@ -17,7 +17,6 @@ export default withRouter (class GameBoard extends Component {
         const schemeArray = await getScheme(this.props.startColor, this.props.mode);
         clearInterval(this.props.playInt);
 
-
         if (this.props.match.params.id) {
             if (this.props.match.params.id === '$$$') {
                 this.props.setAppState({
@@ -25,7 +24,8 @@ export default withRouter (class GameBoard extends Component {
                     gameboard: this.props.gameboard,
                     startColor: this.props.startColor,
                     musicboard: this.props.musicboard,
-                    colorName: this.props.colorName
+                    colorName: this.props.colorName,
+                    isPlaying: false
                 })
             } else {
 
@@ -41,7 +41,8 @@ export default withRouter (class GameBoard extends Component {
                                 schemeArray: schemeParse,
                                 id: this.props.match.params.id,
                                 musicboard: musicParse,
-                                colorName: userBoard.board_name
+                                colorName: userBoard.board_name,
+                                isPlaying: false
                             });
                         }
                     })
@@ -71,17 +72,18 @@ export default withRouter (class GameBoard extends Component {
         const newBoard = this.props.gameboard.slice();
         const newMusic = this.props.musicboard.slice();
 
-        const randomColor = Math.floor(Math.random() * this.props.schemeArray.length)
+        const randomColor = Math.floor(Math.random() * this.props.schemeArray.length);
        
         newBoard[Number(idArray[0])][Number(idArray[1])] = this.props.startColor;
-        newMusic[Number(idArray[0])][Number(idArray[1])] = randomColor;
+        newMusic[Number(idArray[0])][Number(idArray[1])] = this.props.lastRandomNote;
         
         this.props.setAppState({
             startColor: this.props.schemeArray[randomColor],
             gameboard: newBoard,
-            musicboard: newMusic
+            musicboard: newMusic,
+            lastRandomNote: randomColor
         })
-        playAudio(randomColor);
+        playAudio(this.props.lastRandomNote);
     }
 
     getSaved = (newState) => {
@@ -147,13 +149,19 @@ export default withRouter (class GameBoard extends Component {
         clearInterval(this.props.playInt);
     }
 
+    handleMute = () => {
+        this.props.setAppState({ 
+            isMuted: !this.props.isMuted
+        })
+        muteAudio(this.props.isMuted)
+    }
+
     handleStop = () => {
         clearInterval(this.props.playInt)
         this.props.setAppState({ 
             gameboard: this.props.playbackMap,
             isPlaying: false
         })
-
     }
 
     componentWillUnmount() {
@@ -189,7 +197,7 @@ export default withRouter (class GameBoard extends Component {
 
             
                 <BottomDrawer id={this.props.id} currentMusic={this.props.musicboard} getSaved={() => this.getSaved} scheme={this.props.schemeArray} history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.props.gameboard} user={this.props.user}></BottomDrawer>
-                <MusicDrawer play={this.handlePlay} stop={this.handleStop} isPlaying={this.props.isPlaying} playbackSpeed={this.props.playbackSpeed} handlePlaybackSpeed={this.handlePlaybackSpeed}/>
+                <MusicDrawer play={this.handlePlay} stop={this.handleStop} isPlaying={this.props.isPlaying} playbackSpeed={this.props.playbackSpeed} handlePlaybackSpeed={this.handlePlaybackSpeed} isMuted={this.props.isMuted} handleMute={this.handleMute}/>
                 <TopDrawer user={this.props.user}/>
 
             </div>

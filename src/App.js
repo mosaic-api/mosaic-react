@@ -30,8 +30,10 @@ export default class App extends Component {
     playInt: null,
     musicboard: getInitGameState(),
     playbackMap: getInitGameState(),
+    isMuted: false,
     isPlaying: false,
-    playbackSpeed: 500
+    playbackSpeed: 500,
+    lastRandomNote: 0
 }
 setAppState = (object) => {
   this.setState(object)
@@ -82,15 +84,17 @@ setUser = (user) => {
             musicboard={this.state.musicboard}
             setAppState={this.setAppState}
             playbackMap={this.state.playbackMap}
+            isMuted={this.state.isMuted}
             isPlaying={this.state.isPlaying}
             playbackSpeed={this.state.playbackSpeed}
+            lastRandomNote={this.state.lastRandomNote}
             />)} />
 
             
 
             <PrivateRoute exact path="/userboards" component={UserBoards} bgColor={this.state.bgColor} user={this.state.user} />
             <Route exact path="/aboutus" bgColor={this.state.bgColor} component={AboutUs} />
-            <Route exact path="/" render={(props) => <Landing {...props} user={this.state.user} startColor={ this.state.startColor } handleColorSwitch={this.handleColorSwitch} />} />
+            <Route exact path="/" render={(props) => <Landing {...props} user={this.state.user} startColor={ this.state.startColor } handleColorSwitch={this.handleColorSwitch} lastRandomNote={this.state.lastRandomNote} setAppState={this.setAppState}/>} />
           </Switch>
         </BrowserRouter>
       </div>
