@@ -23,13 +23,12 @@ export default class UserBoards extends Component {
 
     render() {
         const boardNodes = this.state.boardsArray.map(board => {
-            return <div>
+            return <div key={Math.random() + board.board_name}>
                 <div className="board-links">
                     <Link to={`/gameboard/${board.id}`}> {board.board_name} </Link>
                     <DeleteOutlineIcon onClick={e => this.handleDelete(board.id)}/> 
                 </div>
                 <hr />       
-
             </div>
                 
         })
@@ -37,9 +36,9 @@ export default class UserBoards extends Component {
             <div id="userboards-app">
                 
                 <MosaicTitle />
-                <ul id="userboards-container">
+                <div id="userboards-container">
                     {boardNodes}
-                </ul>
+                </div>
                 <TopDrawer user={this.props.user}/>
             </div>
         )

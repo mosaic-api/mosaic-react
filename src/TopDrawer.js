@@ -46,7 +46,7 @@ const SwipeableTemporaryDrawer = withRouter(({history, user}) => {
   };
 
   const button = () => (!realUser) ? 
-    <Button variant="contained" size="small" color="secondary" onClick={e => handleLoginButton()} startIcon={<AccountCircleIcon/>}>Login</Button> : <div>
+    <Button variant="contained" size="small" color="secondary" onClick={e => handleLoginButton()} startIcon={<AccountCircleIcon/>}>Login</Button> : <div id="name-log">
     <em>{realUser.name}</em>
     <Button variant="contained" size="small" color="secondary" onClick={e => handleLogoutButton()} startIcon={<AccountCircleIcon/>}>Logout</Button>
   </div>
@@ -58,7 +58,7 @@ const SwipeableTemporaryDrawer = withRouter(({history, user}) => {
       
 
       {button()}
-      <Button variant="contained" size="small" color="primary" onClick={e => handleMyBoards()} startIcon={<SubscriptionsIcon/>}>My Mosaics</Button>
+      <Button variant="contained" size="small" color="primary" onClick={e => handleMyBoards()} disabled={user ? false : true} startIcon={<SubscriptionsIcon/>}>{user ? 'My Mosaics' : 'Must Login'}</Button>
       <Button variant="contained" size="small" color="primary" onClick={e => history.push('/')} startIcon={<AddCircleIcon/>}>New Mosaic</Button>
     </div>
   );

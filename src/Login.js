@@ -58,6 +58,7 @@ export default class Login extends Component {
         return (
             <div id="login-parent">
                 <MosaicTitle />
+                <Button variant="contained" color="secondary" size="medium" onClick={()=> this.props.history.push('/gameboard/$$$')}>Go Play</Button>
 
                 <form id="form-container"> 
                     <Button variant="contained" color="secondary" size="small" onClick={e => this.setState({logBool: !this.state.logBool})}>{this.state.logBool ? "Don't have an account?": "Already Signed Up?"}</Button>
