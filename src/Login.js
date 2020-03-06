@@ -27,7 +27,7 @@ export default class Login extends Component {
             const userData = await signin(user)
             this.props.setUser(userData.body)
            
-            this.props.history.push('/')
+            this.props.history.push('/gameboard/$$$')
         } catch (err) {
             alert(err)
         }
@@ -43,7 +43,7 @@ export default class Login extends Component {
             const userData = await signup(user)
             this.props.setUser(userData.body)
            
-            this.props.history.push('/')
+            this.props.history.push('/gameboard/$$$')
         } catch (err) {
             alert(err)
         }

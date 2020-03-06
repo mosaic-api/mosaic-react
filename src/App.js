@@ -11,15 +11,29 @@ import AboutUs from './AboutUs.js';
 import Landing from './Landing.js';
 // import TopDrawer from './TopDrawer.js';
 import { getRandomColor } from './mosaic-api.js';
-import PrivateRoute from './PrivateRoute.js'
+import PrivateRoute from './PrivateRoute.js';
+import { getInitGameState } from './helper.js';
+
 
 
 
 export default class App extends Component {
   state = { 
     startColor: "#0047AB",
+    colorName: null,
     user: null,
-    bgColor: null
+    bgColor: null,
+    gameboard: getInitGameState(),
+    schemeArray: [],
+    mode: 'analogic-complement',
+    id: null,
+    playInt: null,
+    musicboard: getInitGameState(),
+    playbackMap: getInitGameState(),
+    isPlaying: false
+}
+setAppState = (object) => {
+  this.setState(object)
 }
 
 componentDidMount = async() => {
@@ -54,8 +68,23 @@ setUser = (user) => {
           <Switch>
             <Route exact path="/login" render={(props) => <Login {...props} setUser={this.setUser}/>} />
 
-            <Route exact path="/gameboard/:id?" render={() => <GameBoard colorName={this.state.colorName} startColor={ this.state.startColor } bgColor={this.state.bgColor} user={this.state.user} />} />
-            {/* <PrivateRoute exact path="/gameboard/:id?" component={GameBoard} colorName={this.state.colorName} startColor={ this.state.startColor} user={this.state.user} /> */}
+            <Route exact path="/gameboard/:id?" render={() => (<GameBoard 
+            colorName={this.state.colorName} 
+            startColor={this.state.startColor } 
+            bgColor={this.state.bgColor} 
+            user={this.state.user} 
+            gameboard={this.state.gameboard}
+            schemeArray={this.state.schemeArray}
+            mode={this.state.mode}
+            id={this.state.id}
+            playInt={this.state.playInt}
+            musicboard={this.state.musicboard}
+            setAppState={this.setAppState}
+            playbackMap={this.state.playbackMap}
+            isPlaying={this.state.isPlaying}
+            />)} />
+
+            
 
             <PrivateRoute exact path="/userboards" component={UserBoards} user={this.state.user} />
             <Route exact path="/aboutus" component={AboutUs} />
