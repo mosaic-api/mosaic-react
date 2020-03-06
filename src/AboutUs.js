@@ -10,8 +10,9 @@ export default withRouter (class AboutUs extends Component {
     handleBack = () => this.props.history.push('/gameboard/$$$');
 
     render() {
+        const background = {backgroundColor: this.props.bgColor}
         return (
-            <div id="containerDiv">
+            <div style={background} id="containerDiv">
                 <div id="upperDiv">
                     <MosaicTitle />
                     <Button onClick={this.handleBack} variant="contained" size="small" color="secondary">Go Play</Button>  

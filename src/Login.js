@@ -55,8 +55,9 @@ export default class Login extends Component {
         <Button variant="contained" color="primary" size="large" onClick={this.handleSignUp}>SignUp</Button>;
     hidden = () => this.state.logBool ? {display:'none'}: {display:'inline-block'};
     render() {
+        const background = {backgroundColor: this.props.bgColor}
         return (
-            <div id="login-parent">
+            <div style={background} id="login-parent">
                 <MosaicTitle />
                 <Button variant="contained" color="secondary" size="medium" onClick={()=> this.props.history.push('/gameboard/$$$')}>Go Play</Button>
 
