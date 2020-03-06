@@ -20,6 +20,7 @@ export default withRouter (class AboutUs extends Component {
                 <div id="scott">
                     <h2>Scott</h2>
                     <img src='Scott.png' alt='Scott'></img>                    
+
                     <p>How you Relax: Music</p>
                     <p>Ideal Vacation: New Zealand...land of the hobbits</p>
                 </div>
