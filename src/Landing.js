@@ -14,6 +14,9 @@ export default withRouter(class Landing extends Component {
     }
 
     handlePlay = () => {
+        this.props.setAppState({
+            lastRandomNote: 0
+        })
         this.props.history.push('/gameboard')
     }
     
