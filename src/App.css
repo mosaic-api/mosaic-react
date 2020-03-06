@@ -251,3 +251,37 @@ a {
   left: 15%
 }
 /* ==============Drawer Buttons================== */
+
+/* ====================media query============ */
+
+/* Small devices (landscape phones, 576px and up) */
+@media screen and (min-width: 319px) { 
+  #gameboard-container {
+    transform: scale(0.8);
+    top: -10%;
+    left: 3%
+  }
+ }
+@media viewport and (min-width: 576px) { 
+  #gameboard-container {
+    transform: scale(1);
+    left: -30%
+  }
+ }
+
+/* Medium devices (tablets, 768px and up) */
+@media  only screen and (min-width: 766px) { 
+  #gameboard-container {
+    transform: scale(1.3);
+    top: -2%;
+    left: 3.5%
+  }
+ }
+
+/* Extra large devices (large desktops, 1200px and up) */
+/* @media screen and (min-width: 1200px) { 
+  #gameboard-container {
+    transform: scale(2.7);
+    top: 33%
+  }
+ }  */
