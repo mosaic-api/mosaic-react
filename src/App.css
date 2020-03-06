@@ -53,9 +53,6 @@ a {
   background-color: rgba(255, 127, 80, 0.5);
 }
 
-#music-slider {
-  width: 20%
-}
 
 /* =======================DRAWER======== */
 
@@ -176,6 +173,8 @@ a {
   width: 75px;
   height: 75px;
   margin: 0 auto;
+  position: relative;
+  top: -20%
 }
 /* ==========GAMEBOARD=============== */
 

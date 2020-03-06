@@ -7,14 +7,14 @@ import { withRouter } from 'react-router-dom'
 
 
 export default withRouter (class AboutUs extends Component {
-    handleBack = () => this.props.history.goBack();
+    handleBack = () => this.props.history.push('/gameboard/$$$');
 
     render() {
         return (
             <div id="containerDiv">
                 <div id="upperDiv">
                     <MosaicTitle />
-                    <Button onClick={this.handleBack} variant="contained" size="small" color="secondary">Back...no really, it takes you back</Button>  
+                    <Button onClick={this.handleBack} variant="contained" size="small" color="secondary">Go Play</Button>  
                 </div>
                 
                 <div id="scott">
