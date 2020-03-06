@@ -125,10 +125,11 @@ export default withRouter (class GameBoard extends Component {
                 CountArray[0]++;
             } else {
                 CountArray = [0, 0];
+                this.setState({ isPlaying: false}); 
                 clearInterval(this.state.playInt);
             }
         }, 500);
-        this.setState({ playInt: playTime})    
+        this.setState({ playInt: playTime});  
     }
 
     handleStop = () => {
