@@ -132,8 +132,12 @@ export default withRouter (class GameBoard extends Component {
                 this.props.setAppState({ isPlaying: false}); 
                 clearInterval(this.props.playInt);
             }
-        }, 500);
+        }, this.props.playbackSpeed);
         this.props.setAppState({ playInt: playTime});  
+    }
+
+    handlePlaybackSpeed = (newSpeed) => {
+        this.props.setAppState({ playbackSpeed: newSpeed});  
     }
 
     handleStop = () => {
@@ -178,7 +182,7 @@ export default withRouter (class GameBoard extends Component {
 
             
                 <BottomDrawer id={this.props.id} currentMusic={this.props.musicboard} getSaved={() => this.getSaved} scheme={this.props.schemeArray} history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.props.gameboard} user={this.props.user}></BottomDrawer>
-                <MusicDrawer play={this.handlePlay} stop={this.handleStop} isPlaying={this.props.isPlaying}/>
+                <MusicDrawer play={this.handlePlay} stop={this.handleStop} isPlaying={this.props.isPlaying} playbackSpeed={this.props.playbackSpeed} handlePlaybackSpeed={this.handlePlaybackSpeed}/>
                 <TopDrawer user={this.props.user}/>
 
             </div>

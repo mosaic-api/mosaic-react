@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 });
 // const storedUser = JSON.parse(localStorage.getItem('user'));
 
-const SwipeableTemporaryDrawer = withRouter(({history, isMuted, play, stop, isPlaying}) => {
+const SwipeableTemporaryDrawer = withRouter(({history, isMuted, play, stop, isPlaying, playbackSpeed, handlePlaybackSpeed}) => {
 //   const realUser = user ? user : storedUser;
 
 
@@ -36,7 +36,12 @@ const SwipeableTemporaryDrawer = withRouter(({history, isMuted, play, stop, isPl
     logBool: true,
   });
 
-//   const [value, setValue] = React.useState(30);
+  const [value, setValue] = React.useState(30);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    handlePlaybackSpeed(newValue);
+  };
 
   const toggleDrawer = (side, open) => event => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -45,24 +50,13 @@ const SwipeableTemporaryDrawer = withRouter(({history, isMuted, play, stop, isPl
     setState({ ...state, [side]: open });
   };
 
-//   const handleMyBoards = () => history.push('/userboards');
-//   const handleLoginButton = () => history.push('/login');
-//   const handleLogoutButton = () => {
-//     localStorage.clear();
-//     history.push('/login');
-//   };
-
-
-
   const handleMute = () => {
       console.log('MUTE!')
   }
 
   const button = () => (!isMuted) ? 
-    <Button variant="contained" size="small" color="secondary" onClick={e => handleMute()} startIcon={<MusicNoteIcon/>}>Mute</Button> : <div>
-    <Button variant="contained" size="small" color="secondary" onClick={e => handleMute()} startIcon={<MusicOffIcon/>}>Unmute</Button>
-  </div>
-  ;
+    <Button variant="contained" size="small" color="secondary" onClick={e => handleMute()} startIcon={<MusicNoteIcon/>}>Mute</Button> :
+    <Button variant="contained" size="small" color="secondary" onClick={e => handleMute()} startIcon={<MusicOffIcon/>}>Unmute</Button>;
 
   const fullList = side => (
     <div className={classes.fullList} id="music-drawer-contents" role="presentation" onClick={toggleDrawer(side, false)} onKeyDown={toggleDrawer(side, false)}>
@@ -71,12 +65,12 @@ const SwipeableTemporaryDrawer = withRouter(({history, isMuted, play, stop, isPl
 
       {button()}
       <Button variant="contained" size="small" color="primary" onClick={e => play()} startIcon={<PlayArrowOutlinedIcon/>} disabled={isPlaying}>Play</Button>
-      <Button variant="contained" size="small" color="primary" onClick={e => stop()} startIcon={<StopOutlinedIcon/>}>Stop</Button>
+      <Button variant="contained" size="small" color="primary" onClick={e => stop()} startIcon={<StopOutlinedIcon/>} disabled={!isPlaying}>Stop</Button>
           <div id="music-slider">
               <Typography id="input-slider" gutterBottom>
                   Speed
               </Typography>
-              <Slider id="music-slider" defaultValue={30} aria-labelledby="discrete-slider" step={1} min={10} max={110} />
+              <Slider id="music-slider" defaultValue={500} value={playbackSpeed} aria-labelledby="discrete-slider" step={1} min={200} max={1000} onChange={handleChange} track="inverted" />
           </div>
       </div>
   );

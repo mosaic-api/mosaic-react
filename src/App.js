@@ -30,7 +30,8 @@ export default class App extends Component {
     playInt: null,
     musicboard: getInitGameState(),
     playbackMap: getInitGameState(),
-    isPlaying: false
+    isPlaying: false,
+    playbackSpeed: 500
 }
 setAppState = (object) => {
   this.setState(object)
@@ -82,6 +83,7 @@ setUser = (user) => {
             setAppState={this.setAppState}
             playbackMap={this.state.playbackMap}
             isPlaying={this.state.isPlaying}
+            playbackSpeed={this.state.playbackSpeed}
             />)} />
 
             
