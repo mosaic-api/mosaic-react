@@ -32,8 +32,9 @@ export default class UserBoards extends Component {
             </div>
                 
         })
+        const background = {backgroundColor: this.props.bgColor}
         return (
-            <div id="userboards-app">
+            <div style={background} id="userboards-app">
                 
                 <MosaicTitle />
                 <div id="userboards-container">

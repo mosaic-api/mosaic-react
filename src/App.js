@@ -67,7 +67,7 @@ setUser = (user) => {
         <BrowserRouter>
           {/* <TopDrawer></TopDrawer> */}
           <Switch>
-            <Route exact path="/login" render={(props) => <Login {...props} setUser={this.setUser}/>} />
+            <Route exact path="/login" render={(props) => <Login {...props} bgColor={this.state.bgColor} setUser={this.setUser}/>} />
 
             <Route exact path="/gameboard/:id?" render={() => (<GameBoard 
             colorName={this.state.colorName} 
@@ -88,8 +88,8 @@ setUser = (user) => {
 
             
 
-            <PrivateRoute exact path="/userboards" component={UserBoards} user={this.state.user} />
-            <Route exact path="/aboutus" component={AboutUs} />
+            <PrivateRoute exact path="/userboards" component={UserBoards} bgColor={this.state.bgColor} user={this.state.user} />
+            <Route exact path="/aboutus" bgColor={this.state.bgColor} component={AboutUs} />
             <Route exact path="/" render={(props) => <Landing {...props} user={this.state.user} startColor={ this.state.startColor } handleColorSwitch={this.handleColorSwitch} />} />
           </Switch>
         </BrowserRouter>
