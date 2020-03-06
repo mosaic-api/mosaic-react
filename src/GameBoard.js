@@ -155,10 +155,9 @@ export default withRouter (class GameBoard extends Component {
        
         const rowNodes = getInitGameState().map((rows, i) => {
             const cellNodes = getInitGameState()[0].map((cell, j) => {
-                return <div className="cell" style={{backgroundColor: this.props.gameboard[i][j]}} id={`cell_${i}-${j}`}></div>
+                return <div className="cell" key={`cellKey_${i}-${j}`}style={{backgroundColor: this.props.gameboard[i][j]}} id={`cell_${i}-${j}`}></div>
             })
-
-            return (<div className="row" id={`row_${i}`}>{cellNodes}</div>)
+            return (<div className="row" key={`rowKey_${i}`}id={`row_${i}`}>{cellNodes}</div>)
         })
     
         const background = {backgroundColor: this.props.bgColor}

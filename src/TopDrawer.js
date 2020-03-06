@@ -58,7 +58,7 @@ const SwipeableTemporaryDrawer = withRouter(({history, user}) => {
       
 
       {button()}
-      <Button variant="contained" size="small" color="primary" onClick={e => handleMyBoards()} startIcon={<SubscriptionsIcon/>}>My Mosaics</Button>
+      <Button variant="contained" size="small" color="primary" onClick={e => handleMyBoards()} disabled={user ? false : true} startIcon={<SubscriptionsIcon/>}>{user ? 'My Mosaics' : 'Must Login'}</Button>
       <Button variant="contained" size="small" color="primary" onClick={e => history.push('/')} startIcon={<AddCircleIcon/>}>New Mosaic</Button>
     </div>
   );
