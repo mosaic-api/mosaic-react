@@ -19,7 +19,7 @@ export default withRouter (class AboutUs extends Component {
                 
                 <div id="scott">
                     <h2>Scott</h2>
-                    <img src='https://mosaicartsupply.com/wp-content/uploads/2016/01/pattern-rooster-colored-6001.jpg' alt='Scott'></img>                    
+                    <img src='https://mosaicartsupply.com/wp-content/uploads/2016/01/pattern-rooster-Sco-6001.jpg' alt='Scott'></img>                    
                     <p>How you Relax: Music</p>
                     <p>Ideal Vacation: New Zealand...land of the hobbits</p>
                 </div>
