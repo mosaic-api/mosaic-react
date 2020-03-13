@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-const SwipeableTemporaryDrawer = withRouter(({history, user}) => {
+const SwipeableTemporaryDrawer = withRouter(({history, user, setAppState}) => {
   const realUser = user 
 
 
@@ -42,6 +42,7 @@ const SwipeableTemporaryDrawer = withRouter(({history, user}) => {
   const handleMyBoards = () => history.push('/userboards');
   const handleLoginButton = () => history.push('/login');
   const handleLogoutButton = () => {
+    setAppState({ user: null, id: null })
     history.push('/login');
   };
 

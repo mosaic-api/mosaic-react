@@ -40,7 +40,7 @@ export default class UserBoards extends Component {
                 <div id="userboards-container">
                     {boardNodes}
                 </div>
-                <TopDrawer user={this.props.user}/>
+                <TopDrawer user={this.props.user} setAppState={this.props.setAppState} />
             </div>
         )
     }

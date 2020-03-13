@@ -3,7 +3,7 @@ import './about.css';
 import MosaicTitle from './MosaicTitle.js'; 
 import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router-dom'
-
+import TopDrawer from './TopDrawer.js';
 
 
 export default withRouter (class AboutUs extends Component {
@@ -21,7 +21,6 @@ export default withRouter (class AboutUs extends Component {
                 <div id="scott">
                     <h2>Scott</h2>
                     <img src='Scott.png' alt='Scott'></img>                    
-
                     <p>How you Relax: Music</p>
                     <p>Ideal Vacation: New Zealand...land of the hobbits</p>
                 </div>
@@ -43,7 +42,7 @@ export default withRouter (class AboutUs extends Component {
                     <p>How you Relax: That's my secret </p>
                     <p>Ideal Vacation: New Zealand North and South Island</p>
                 </div>
-
+                <TopDrawer user={this.props.user} setAppState={this.props.setAppState} />
             </div>
         )
     }
