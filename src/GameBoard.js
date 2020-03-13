@@ -58,7 +58,8 @@ export default withRouter (class GameBoard extends Component {
                 startColor: this.props.startColor,
                 musicboard: getInitGameState(),
                 colorName: this.props.colorName,
-                isPlaying: false
+                isPlaying: false,
+                id: null
             })
         }
         audioStart();
@@ -198,7 +199,7 @@ export default withRouter (class GameBoard extends Component {
             
                 <BottomDrawer id={this.props.id} currentMusic={this.props.musicboard} getSaved={() => this.getSaved} scheme={this.props.schemeArray} history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.props.gameboard} user={this.props.user}></BottomDrawer>
                 <MusicDrawer play={this.handlePlay} stop={this.handleStop} isPlaying={this.props.isPlaying} playbackSpeed={this.props.playbackSpeed} handlePlaybackSpeed={this.handlePlaybackSpeed} isMuted={this.props.isMuted} handleMute={this.handleMute}/>
-                <TopDrawer user={this.props.user}/>
+                <TopDrawer user={this.props.user} setAppState={this.props.setAppState} />
 
             </div>
         )

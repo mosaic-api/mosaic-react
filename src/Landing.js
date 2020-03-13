@@ -39,7 +39,7 @@ export default withRouter(class Landing extends Component {
                         <Button variant="contained" onClick={this.props.handleColorSwitch} color="secondary" size="small" startIcon={<ColorLensIcon />}>Color Switch</Button>
                     </div>
                 </div>
-                <TopDrawer user={this.props.user}/>
+                <TopDrawer user={this.props.user} setAppState={this.props.setAppState} />
 
             </div>
         )

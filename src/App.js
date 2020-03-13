@@ -67,7 +67,6 @@ setUser = (user) => {
     return (
       <div id="App">
         <BrowserRouter>
-          {/* <TopDrawer></TopDrawer> */}
           <Switch>
             <Route exact path="/login" render={(props) => <Login {...props} bgColor={this.state.bgColor} setUser={this.setUser}/>} />
 
@@ -92,8 +91,8 @@ setUser = (user) => {
 
             
 
-            <PrivateRoute exact path="/userboards" component={UserBoards} bgColor={this.state.bgColor} user={this.state.user} />
-            <Route exact path="/aboutus" bgColor={this.state.bgColor} component={AboutUs} />
+            <PrivateRoute exact path="/userboards" component={UserBoards} bgColor={this.state.bgColor} user={this.state.user} setAppState={this.setAppState}/>
+            <Route exact path="/aboutus" bgColor={this.state.bgColor} component={AboutUs} setAppState={this.setAppState} />
             <Route exact path="/" render={(props) => <Landing {...props} user={this.state.user} startColor={ this.state.startColor } handleColorSwitch={this.handleColorSwitch} lastRandomNote={this.state.lastRandomNote} setAppState={this.setAppState}/>} />
           </Switch>
         </BrowserRouter>
