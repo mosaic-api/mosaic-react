@@ -1,3 +1,40 @@
+                                        
+          |‾‾‾‾‾\  /‾‾‾‾‾|  |‾‾‾‾‾‾‾‾‾|  |‾‾‾‾‾‾‾‾‾|  |‾‾‾‾‾‾‾‾‾|  |‾‾|  |‾‾‾‾‾‾‾‾‾|  
+          |   |\ \/ /|   |  |  |‾‾‾|  |  | |‾‾‾‾‾‾‾   |  |‾‾‾|  |  |  |  |   ______|
+          |   | \  / |   |  |  |   |  |  |  ‾‾‾‾‾‾‾|  |   ‾‾‾   |  |  |  |  |
+          |   |  \/  |   |  |  |   |  |  |_______  |  |  |‾‾‾|  |  |  |  |  |
+          |   |      |   |  |  |___|  |   _______| |  |  |   |  |  |  |  |   ‾‾‾‾‾‾|
+          |___|      |___|  |_________|  |_________|  |__|   |__|  |__|  |_________|
+          
+
+                               ___      ___        ____________      _____________       _____       ____    ____________
+                              /   \    /   \      |  _______   |   /   ___________|     /     \      |  |   |   ________/
+                             /  /\ \  / /\  \     |  |      |  |  |   /___________     /  /\   \     |  |   |  |
+                            /  /  \ \/ /  \  \    |  |      |  |  | ___________  |    /  /__\   \    |  |   |  |
+                           /  /    \__/    \  \   |  |______|  |   ___________/  |   /  ______   \   |  |   |  |__________
+                          /__/              \__\  |____________|  |_____________/   /__/       \__\  |__|   |____________/
+
+
+
+
+# Things to come. Future Features.
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+loading spinners
+try catches on all calls
+landscape or lock landscape
+clean up README.md
+rename files
+reorganize layout
+fade in title
+picture on landing page and/or logo
+more options for music
+remove black, white, gray, (and super dark/light color?)
+name it your saved board (overrideable name)
+
+*stretch* ability to share; share something that's playable
+
+
+
 # Mosaic
 
 ## Chris, Cody, Joe, and Scott
