@@ -107,10 +107,11 @@ export default withRouter (class GameBoard extends Component {
         console.log('scheme', this.props.schemeArray)
     }
 
+    // this function does a lot of work, and it would be really hard to maintain if i were a dev walking into this project. it would be a good idea to refactor with specific names and comments to clarify what's happening here and why
     handlePlay = () => {
         clearInterval(this.props.playInt)
 
-        let CountArray = [0, 0]    
+        let countArray = [0, 0]    
         const mapOver = this.props.gameboard;
         let blankBoard = getInitPlaybackState();
 
@@ -119,19 +120,20 @@ export default withRouter (class GameBoard extends Component {
             playbackMap: mapOver,
             isPlaying: true })
         let playTime = setInterval(() => {
-            if (!isNaN(this.props.musicboard[CountArray[0]][CountArray[1]])) {
-                const savedNote = this.props.musicboard[CountArray[0]][CountArray[1]];
+            // this could use some comments or helpful storing of values in consts, like
+            const savedNote = this.props.musicboard[countArray[0]][countArray[1]];
+            if (!isNaN(savedNote)) {
                 playAudio(savedNote);
             }
-            blankBoard[CountArray[0]][CountArray[1]] = mapOver[CountArray[0]][CountArray[1]];
+            blankBoard[countArray[0]][countArray[1]] = mapOver[countArray[0]][countArray[1]];
             this.props.setAppState({gameboard: blankBoard})
-            if (CountArray[1] < this.props.gameboard[0].length - 1) {
-                CountArray[1]++;
-            } else if (CountArray[0] < this.props.gameboard.length - 1) {
-                CountArray[1] = 0;
-                CountArray[0]++;
+            if (countArray[1] < this.props.gameboard[0].length - 1) {
+                countArray[1]++;
+            } else if (countArray[0] < this.props.gameboard.length - 1) {
+                countArray[1] = 0;
+                countArray[0]++;
             } else {
-                CountArray = [0, 0];
+                countArray = [0, 0];
 
                 this.props.setAppState({ isPlaying: false}); 
                 clearInterval(this.props.playInt);
@@ -166,6 +168,7 @@ export default withRouter (class GameBoard extends Component {
 
     componentWillUnmount() {
         stopAudio();
+        // awesome interval clearin' on unmount!
         clearInterval(this.props.playInt)
     }
 
@@ -196,8 +199,25 @@ export default withRouter (class GameBoard extends Component {
                 </div>
 
             
-                <BottomDrawer id={this.props.id} currentMusic={this.props.musicboard} getSaved={() => this.getSaved} scheme={this.props.schemeArray} history={this.props.history} colorName={this.props.colorName} handleChangeScheme={this.handleChangeScheme} gameState={this.props.gameboard} user={this.props.user}></BottomDrawer>
-                <MusicDrawer play={this.handlePlay} stop={this.handleStop} isPlaying={this.props.isPlaying} playbackSpeed={this.props.playbackSpeed} handlePlaybackSpeed={this.handlePlaybackSpeed} isMuted={this.props.isMuted} handleMute={this.handleMute}/>
+            // way easier to read with the props line up like so
+                <BottomDrawer id={this.props.id}
+                    currentMusic={this.props.musicboard}
+                    getSaved={() => this.getSaved}
+                    scheme={this.props.schemeArray}  
+                    history={this.props.history}  
+                    colorName={this.props.colorName}  
+                    handleChangeScheme={this.handleChangeScheme}  
+                    gameState={this.props.gameboard}
+                    user={this.props.user}>
+
+                </BottomDrawer>
+                <MusicDrawer play={this.handlePlay}
+                    stop={this.handleStop}
+                    isPlaying={this.props.isPlaying}
+                    playbackSpeed={this.props.playbackSpeed}
+                    handlePlaybackSpeed={this.handlePlaybackSpeed}
+                    isMuted={this.props.isMuted}
+                    handleMute={this.handleMute}/>
                 <TopDrawer user={this.props.user}/>
 
             </div>
