@@ -53,7 +53,7 @@ const SwipeableTemporaryDrawer = withRouter(({history, isMuted, handleMute, play
     <Button variant="contained" size="small" color="secondary" onClick={e => handleMuteChange()} startIcon={<MusicOffIcon/>}>Unmute</Button>;
 
   const fullList = side => (
-    <div className={classes.fullList} id="music-drawer-contents" role="presentation" onClick={toggleDrawer(side, false)} onKeyDown={toggleDrawer(side, false)}>
+    <div className={classes.fullList} id="music-drawer-contents" role="presentation" onClick={toggleDrawer(side, true)} onKeyDown={toggleDrawer(side, false)}>
 
       
 

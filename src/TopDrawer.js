@@ -54,7 +54,7 @@ const SwipeableTemporaryDrawer = withRouter(({history, user, setAppState}) => {
   ;
 
   const fullList = side => (
-    <div className={classes.fullList} id="top-drawer-contents" role="presentation" onClick={toggleDrawer(side, false)} onKeyDown={toggleDrawer(side, false)}>
+    <div className={classes.fullList} id="top-drawer-contents" role="presentation" onClick={toggleDrawer(side, true)} onKeyDown={toggleDrawer(side, false)}>
 
       
 

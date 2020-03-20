@@ -9,6 +9,8 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import SaveIcon from '@material-ui/icons/Save';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 function Alert(props) {
   return <MuiAlert elevation={10} variant="filled" {...props} />;
@@ -41,6 +43,7 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
     left: false,
     bottom: false,
     right: false,
+    loading: false
   });
   const [mode, setMode] = React.useState('');
 
@@ -50,6 +53,9 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
     }
     setState({ ...state, [side]: open });
   };
+  const setLoadingState = (bool) => {
+    setState({ ...state, loading: bool})
+  }
   const handleChangeSelect = e => {
     setMode(e.target.value);
     handleChangeScheme(e)
@@ -58,6 +64,7 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
     const stringyState = JSON.stringify(gameState)
     const stringyScheme = JSON.stringify(scheme)
     const stringyMusicBoard = JSON.stringify(currentMusic)
+    setLoadingState(true)
     if (!id){
       const gameObject = {
         board_name: colorName,
@@ -76,8 +83,11 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
       await updateBoard(gameObject, user, id)
     }
     setOpen(true);
+    setLoadingState(false);
+    
   }
   const handleClose = (event, reason) => {
+    
     if (reason === 'clickaway') {
       return;
     }
@@ -85,7 +95,7 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
   };
   
   const fullList = side => (
-    <div className={classes.fullList} id="bottom-drawer-contents" role="presentation" onClick={toggleDrawer(side, false)} onKeyDown={toggleDrawer(side, false)}>
+    <div className={classes.fullList} id="bottom-drawer-contents" role="presentation" onClick={toggleDrawer(side, true)} onKeyDown={toggleDrawer(side, false)}>
       <em>{colorName}</em>
       <FormControl variant="outlined" className={classes.formControl}>
 
@@ -103,7 +113,20 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
               <MenuItem value="quad">Quad</MenuItem>
           </Select>
       </FormControl>
-      <Button variant="contained" size="small" color="secondary" disabled={user ? false : true} onClick={e => handleSave()} startIcon={<SaveIcon/>}>{user ? 'Save Mosaic': 'Must Login'}</Button>
+      {(state.loading) 
+      ? <CircularProgress /> 
+      :
+      <Button 
+        variant="contained" 
+        size="small" 
+        color="secondary" 
+        disabled={user ? false : true} 
+        onClick={e => handleSave()} 
+        startIcon={<SaveIcon/>}
+      >
+        {user ? 'Save Mosaic': 'Must Login'}
+      </Button>
+      }
     </div>
   );
 
