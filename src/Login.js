@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { TextField, Button } from '@material-ui/core';
 import { signup, signin } from './mosaic-api.js';
 import MosaicTitle from './MosaicTitle.js';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default class Login extends Component {
     state = {
@@ -9,6 +10,7 @@ export default class Login extends Component {
         emailInput: '',
         passwordInput: '',
         logBool: true,
+        loading: false
     }
 
     handleInput = e => {
@@ -17,8 +19,13 @@ export default class Login extends Component {
         })
     }
 
+    switchLoadingState() {
+        this.setState({ loading: !this.state.loading})
+    } 
+
     handleSignIn = async(e) => {
         e.preventDefault()
+        this.switchLoadingState()
         const user = {
             email: this.state.emailInput,
             password: this.state.passwordInput,
@@ -31,9 +38,11 @@ export default class Login extends Component {
         } catch (err) {
             alert(err)
         }
+        this.switchLoadingState()
     }
     handleSignUp = async(e) => {
         e.preventDefault()
+        this.switchLoadingState()
         const user = {
             email: this.state.emailInput,
             password: this.state.passwordInput,
@@ -47,12 +56,14 @@ export default class Login extends Component {
         } catch (err) {
             alert(err)
         }
+        this.switchLoadingState()
     }
     
 
     button = () => (this.state.logBool) ? 
         <Button variant="contained" color="primary" size="large" onClick={this.handleSignIn}>LogIn</Button> : 
         <Button variant="contained" color="primary" size="large" onClick={this.handleSignUp}>SignUp</Button>;
+
     hidden = () => this.state.logBool ? {display:'none'}: {display:'inline-block'};
     render() {
         const background = {backgroundColor: this.props.bgColor}
@@ -69,7 +80,7 @@ export default class Login extends Component {
                     <TextField required id="emailInput" value={this.state.emailInput} onChange={this.handleInput} label="Email" variant="outlined"/>
 
                     <TextField required id="passwordInput" value={this.state.passwordInput} type="password" onChange={this.handleInput} label="Password" variant="outlined"/>
-                    {this.button()}
+                    {(this.state.loading) ? <CircularProgress /> : this.button()}
                 </form>
             </div>
         )

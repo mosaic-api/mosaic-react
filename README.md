@@ -19,17 +19,23 @@
 
 # Things to come. Future Features.
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-loading spinners
-try catches on all calls
-landscape or lock landscape
-clean up README.md
-rename files
-reorganize layout
-fade in title
-picture on landing page and/or logo
-more options for music
-remove black, white, gray, (and super dark/light color?)
-name it your saved board (overrideable name)
+[]loading spinners
+  []loading user boards
+  [x]deleteing userboards
+  [x]saving boards
+  [x]login
+[]try/catches on all calls
+[]change catch errors to onscreen messages
+[]refactor code and clean up
+[]landscape or lock landscape
+[]clean up README.md
+[]rename files
+[]reorganize layout
+[]fade in title
+[]picture on landing page and/or logo
+[]more options for music
+[]remove black, white, gray, (and super dark/light color?)
+[]name it your saved board (overrideable name)
 
 *stretch* ability to share; share something that's playable
 
