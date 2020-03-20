@@ -21,8 +21,9 @@
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 []loading spinners
   []loading user boards
-  []deleteing userboards
-  []saving boards
+  [x]deleteing userboards
+  [x]saving boards
+  [x]login
 []try/catches on all calls
 []change catch errors to onscreen messages
 []refactor code and clean up
