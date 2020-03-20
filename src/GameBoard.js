@@ -82,7 +82,8 @@ export default withRouter (class GameBoard extends Component {
             startColor: this.props.schemeArray[randomColor],
             gameboard: newBoard,
             musicboard: newMusic,
-            lastRandomNote: randomColor
+            lastRandomNote: randomColor,
+            playbackMap: this.props.gameboard
         })
         playAudio(this.props.lastRandomNote);
     }
