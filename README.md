@@ -1,18 +1,9 @@
-                                        
-          |‾‾‾‾‾\  /‾‾‾‾‾|  |‾‾‾‾‾‾‾‾‾|  |‾‾‾‾‾‾‾‾‾|  |‾‾‾‾‾‾‾‾‾|  |‾‾|  |‾‾‾‾‾‾‾‾‾|  
-          |   |\ \/ /|   |  |  |‾‾‾|  |  | |‾‾‾‾‾‾‾   |  |‾‾‾|  |  |  |  |   ______|
-          |   | \  / |   |  |  |   |  |  |  ‾‾‾‾‾‾‾|  |   ‾‾‾   |  |  |  |  |
-          |   |  \/  |   |  |  |   |  |  |_______  |  |  |‾‾‾|  |  |  |  |  |
-          |   |      |   |  |  |___|  |   _______| |  |  |   |  |  |  |  |   ‾‾‾‾‾‾|
-          |___|      |___|  |_________|  |_________|  |__|   |__|  |__|  |_________|
-          
-
-                               ___      ___        ____________      _____________       _____       ____    ____________
-                              /   \    /   \      |  _______   |   /   ___________|     /     \      |  |   |   ________/
-                             /  /\ \  / /\  \     |  |      |  |  |   /___________     /  /\   \     |  |   |  |
-                            /  /  \ \/ /  \  \    |  |      |  |  | ___________  |    /  /__\   \    |  |   |  |
-                           /  /    \__/    \  \   |  |______|  |   ___________/  |   /  ______   \   |  |   |  |__________
-                          /__/              \__\  |____________|  |_____________/   /__/       \__\  |__|   |____________/
+     ___      ___        ___________      ____________         ______       ____    ____________
+    /***\    /***\      /************\   /************\       /******\      |**|   |***********/
+   /**/\*\  /*/\**\     |**|      |**|  |***/___________     /***/\***\     |**|   |**|
+  /**/  \*\/*/  \**\    |**|      |**|  | *************|    /***/__\***\    |**|   |**|
+ /**/    \**/    \**\   |**|______|**|   ___________/**|   /**________**\   |**|   |**|__________
+/**/              \**\   \**********/   /*************/   /**/        \**\  |**|   |************/
 
 
 
@@ -50,20 +41,22 @@
 []name it your saved board (overrideable name)
 
 *stretch* ability to share; share something that's playable
+*stretch* spinner on individual delete icon
+
+### To Play, click: https://the-mosaic.herokuapp.com/ and wait for the game to load. Once you see the word Mosaic. You're good.
+
+## Brought to you by the creative minds of Chris Ficht, Scott Harlan, Joe Goodman (v1.0.0), and Cody Brown with less than a year combined under their belts. 
+
+### Problem Domain: In a world where stress and anxiety are all too common we bring you a way to relax. There are no points to worry about, no microtransactions to be bought, nor will your data be harvested. Just sit back and relax.
+### Problem Domain: Stress in a stressful world! Don't you just wanna set aside your worries and take the edge off modern life?? Well there are drugs for that...but in the meantime there is ... Mosaic :)
+
+### Mosaic is a free to play mosaic creator with a bit of a musical twist. Once the game loads you start off by choosing your starting color palette; you can switch colors by clicking on 'switch color'. Once you have the desired color click 'play'. Once you click play you are presented with a game-board, the word mosaic, and a variety of settings.
+### Game-board: The game-board consists of a number of triangles. Click on one and it both changes colors, and plays a note which can be played back later. From here you can create your very own mosaic. Some of the more popular things to create are giants, foxes, hearts, boats, and more.
+### The Word Mosaic: The word mosaic at the top displays your current color palette. To change the color palette go into settings.
+### Settings: There are 3 main settings: User, Color, and Music. In user settings you can create and sign into an existing user as well as go to your existing saved game-boards. In Color you can change the palette you're working with, view the name of your mosaic, as well as save your mosaic for a later date. In music you can mute the app or playback your mosaic at a variety of speeds. 
 
 
-
-# Mosaic
-
-## Chris, Cody, Joe, and Scott
-
-### It's a F@#cking Relaxtion Color App, just....just play it
-
-### Problem Domain: Stress in a stressfull world! Don't you just wanna set aside your worries and take the edge off modern life?? Well there are drugs for that, but in the meantime there is ... Mosaic :)
-
-### To Play click: https://the-mosaic.herokuapp.com/
-
-### Version 1.0.0 
+### Version 1.2.1 
 
 ### Front End Dependencies: 
 ```
