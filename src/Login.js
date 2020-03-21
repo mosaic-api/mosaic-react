@@ -3,6 +3,12 @@ import { TextField, Button } from '@material-ui/core';
 import { signup, signin } from './mosaic-api.js';
 import MosaicTitle from './MosaicTitle.js';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+    return <MuiAlert elevation={10} variant="filled" {...props} />;
+}
 
 export default class Login extends Component {
     state = {
@@ -10,9 +16,24 @@ export default class Login extends Component {
         emailInput: '',
         passwordInput: '',
         logBool: true,
-        loading: false
-    }
+        loading: false,
+        //snack bar
+        open: false
 
+    }
+    //snack bar stuff
+    handleClick = () => {
+        this.setState({open: true})
+    };
+    
+    handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+    
+        this.setState({open: false})
+    };
+    //^snackbar stuff
     handleInput = e => {
         this.setState({
             [e.target.id]: e.target.value
@@ -36,7 +57,7 @@ export default class Login extends Component {
            
             this.props.history.push('/gameboard/$$$')
         } catch (err) {
-            alert(err)
+            this.setState({open: true})
         }
         this.switchLoadingState()
     }
@@ -54,7 +75,7 @@ export default class Login extends Component {
            
             this.props.history.push('/gameboard/$$$')
         } catch (err) {
-            alert(err)
+            this.setState({open: true})
         }
         this.switchLoadingState()
     }
@@ -82,6 +103,12 @@ export default class Login extends Component {
                     <TextField required id="passwordInput" value={this.state.passwordInput} type="password" onChange={this.handleInput} label="Password" variant="outlined"/>
                     {(this.state.loading) ? <CircularProgress /> : this.button()}
                 </form>
+
+                <Snackbar open={this.state.open} autoHideDuration={6000} onClose={this.handleClose}>
+                    <Alert onClose={this.handleClose} severity="warning">
+                         {(this.state.logBool) ? 'user does not exist or wrong password' : 'user already exists or invalid input'}   
+                    </Alert>
+                </Snackbar>
             </div>
         )
     }

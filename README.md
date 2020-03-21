@@ -19,13 +19,25 @@
 
 # Things to come. Future Features.
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-[]loading spinners
-  []loading user boards
+[x]loading spinners
+  [x]loading board
   [x]deleteing userboards
   [x]saving boards
   [x]login
 []try/catches on all calls
+  [x]login/signin
+  [x]saving
+  [x]deleting
+  [x]get boards
+  [x]switch color pallete
+  [x]get random color
 []change catch errors to onscreen messages
+  []login/signin
+  []saving
+  []deleting
+  []get boards
+  []switch color pallete
+  []get random color
 []refactor code and clean up
 []landscape or lock landscape
 []clean up README.md

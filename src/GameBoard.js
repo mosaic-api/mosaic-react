@@ -8,61 +8,66 @@ import MosaicTitle from './MosaicTitle.js';
 import audioStart, { playAudio, stopAudio, muteAudio } from './audio.js';
 import MusicDrawer from './MusicDrawer.js';
 import { getInitPlaybackState } from './helper.js';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 
 export default withRouter (class GameBoard extends Component {
+    state = { loading: true } 
 
 
     componentDidMount = async () => {
-        const schemeArray = await getScheme(this.props.startColor, this.props.mode);
-        clearInterval(this.props.playInt);
-
-        if (this.props.match.params.id) {
-            if (this.props.match.params.id === '$$$') {
+        try {
+            const schemeArray = await getScheme(this.props.startColor, this.props.mode);
+            clearInterval(this.props.playInt);
+    
+            if (this.props.match.params.id) {
+                if (this.props.match.params.id === '$$$') {
+                    this.props.setAppState({
+                        schemeArray: schemeArray,
+                        gameboard: this.props.gameboard,
+                        startColor: this.props.startColor,
+                        musicboard: this.props.musicboard,
+                        colorName: this.props.colorName,
+                        isPlaying: false
+                    })
+                } else {
+    
+                    try {
+                        const userBoards = await getBoards(this.props.user);
+                        userBoards.body.forEach(userBoard => {
+                            if (userBoard.id === Number(this.props.match.params.id)) {
+                                const boardParse = JSON.parse(userBoard.game_board);
+                                const schemeParse = JSON.parse(userBoard.scheme);
+                                const musicParse = JSON.parse(userBoard.music_board);
+                                this.props.setAppState({ 
+                                    gameboard: boardParse,
+                                    schemeArray: schemeParse,
+                                    id: this.props.match.params.id,
+                                    musicboard: musicParse,
+                                    colorName: userBoard.board_name,
+                                    isPlaying: false
+                                });
+                            }
+                        })
+                        
+                    } catch (err) {
+                        return;
+                    }
+                }
+            } else {
                 this.props.setAppState({
                     schemeArray: schemeArray,
-                    gameboard: this.props.gameboard,
+                    gameboard: getInitGameState(), 
                     startColor: this.props.startColor,
-                    musicboard: this.props.musicboard,
+                    musicboard: getInitGameState(),
                     colorName: this.props.colorName,
-                    isPlaying: false
+                    isPlaying: false,
+                    id: null
                 })
-            } else {
-
-                try {
-                    const userBoards = await getBoards(this.props.user);
-                    userBoards.body.forEach(userBoard => {
-                        if (userBoard.id === Number(this.props.match.params.id)) {
-                            const boardParse = JSON.parse(userBoard.game_board);
-                            const schemeParse = JSON.parse(userBoard.scheme);
-                            const musicParse = JSON.parse(userBoard.music_board);
-                            this.props.setAppState({ 
-                                gameboard: boardParse,
-                                schemeArray: schemeParse,
-                                id: this.props.match.params.id,
-                                musicboard: musicParse,
-                                colorName: userBoard.board_name,
-                                isPlaying: false
-                            });
-                        }
-                    })
-                    
-                } catch (err) {
-                    return;
-                }
             }
-        } else {
-            this.props.setAppState({
-                schemeArray: schemeArray,
-                gameboard: getInitGameState(), 
-                startColor: this.props.startColor,
-                musicboard: getInitGameState(),
-                colorName: this.props.colorName,
-                isPlaying: false,
-                id: null
-            })
-        }
-        audioStart();
+            this.setState( { loading: false})
+            audioStart();
+        } catch (err) { alert(err)}
     }
 
     handleClick = (e) => {
@@ -101,12 +106,13 @@ export default withRouter (class GameBoard extends Component {
     }
 
     handleChangeScheme = async(e) =>  {
-        const schemeArray = await getScheme(this.props.startColor, e.target.value)
-        this.props.setAppState({
-            schemeArray: schemeArray,
-            mode: e.target.value
-        })
-        console.log('scheme', this.props.schemeArray)
+        try {
+            const schemeArray = await getScheme(this.props.startColor, e.target.value)
+            this.props.setAppState({
+                schemeArray: schemeArray,
+                mode: e.target.value
+            })
+        } catch (err) { alert(err)}
     }
 
     handlePlay = () => {
@@ -189,7 +195,7 @@ export default withRouter (class GameBoard extends Component {
                     
                     <MosaicTitle schemeArray={this.props.schemeArray} />
                     <div id="gameboard-container" onClick= { this.handleClick }>
-                        {rowNodes}
+                        {(this.state.loading) ? <LinearProgress/> : rowNodes}
                     </div>
                     <div id="preview-container">
                         <div id="tile-preview" style={{backgroundColor: this.props.startColor}}>

@@ -40,6 +40,7 @@ setAppState = (object) => {
 }
 
 componentDidMount = async() => {
+  try {
     const colorData = await getRandomColor();
     const rgbaString = `rgba(${colorData.body.rgb.r}, ${colorData.body.rgb.g}, ${colorData.body.rgb.b}, 0.3)`
     this.setState({
@@ -47,9 +48,10 @@ componentDidMount = async() => {
         colorName: colorData.body.name.value,
         bgColor: rgbaString
     })
-    
+  } catch (err) { alert(err) }
 }
 handleColorSwitch = async() => {
+  try {
     const colorData = await getRandomColor();
     const rgbaString = `rgba(${colorData.body.rgb.r}, ${colorData.body.rgb.g}, ${colorData.body.rgb.b}, 0.3)`
     this.setState({
@@ -57,6 +59,7 @@ handleColorSwitch = async() => {
       colorName: colorData.body.name.value,
       bgColor: rgbaString
     })
+  } catch (err) { alert(err) }
 }
 setUser = (user) => {
   this.setState({user: user})

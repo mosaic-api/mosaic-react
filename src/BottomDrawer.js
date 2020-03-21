@@ -65,26 +65,28 @@ export default function SwipeableTemporaryDrawer({handleChangeScheme, gameState,
     const stringyScheme = JSON.stringify(scheme)
     const stringyMusicBoard = JSON.stringify(currentMusic)
     setLoadingState(true)
-    if (!id){
-      const gameObject = {
-        board_name: colorName,
-        game_board: stringyState,
-        scheme: stringyScheme,
-        music_board: stringyMusicBoard
+    try {
+      if (!id){
+        const gameObject = {
+          board_name: colorName,
+          game_board: stringyState,
+          scheme: stringyScheme,
+          music_board: stringyMusicBoard
+        }
+        const saved = await saveBoard(gameObject, user);
+        getSaved(saved.body)
+      } else {
+        const gameObject = {
+          game_board: stringyState,
+          scheme: stringyScheme,
+          music_board: stringyMusicBoard
+        }
+        await updateBoard(gameObject, user, id)
       }
-      const saved = await saveBoard(gameObject, user);
-      getSaved(saved.body)
-    } else {
-      const gameObject = {
-        game_board: stringyState,
-        scheme: stringyScheme,
-        music_board: stringyMusicBoard
-      }
-      await updateBoard(gameObject, user, id)
-    }
-    setOpen(true);
-    setLoadingState(false);
-    
+      setOpen(true);
+      setLoadingState(false);
+      
+    } catch (err) { alert(err) }
   }
   const handleClose = (event, reason) => {
     

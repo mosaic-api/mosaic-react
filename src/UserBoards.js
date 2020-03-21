@@ -13,8 +13,10 @@ export default class UserBoards extends Component {
     }
 
     componentDidMount = async () => {
-        const boardsData = await getBoards(this.props.user)
-        this.setState({boardsArray: boardsData.body})
+        try {
+            const boardsData = await getBoards(this.props.user)
+            this.setState({boardsArray: boardsData.body})
+        } catch (err) { alert(err)}
     }
 
     switchLoadingState() {
@@ -23,10 +25,12 @@ export default class UserBoards extends Component {
 
     handleDelete = async (id) => {
         this.switchLoadingState();
-        await deleteBoard(id, this.props.user)
-        const boardsData = await getBoards(this.props.user)
-        this.setState({boardsArray: boardsData.body})
-        this.switchLoadingState();
+        try {
+            await deleteBoard(id, this.props.user)
+            const boardsData = await getBoards(this.props.user)
+            this.setState({boardsArray: boardsData.body})
+            this.switchLoadingState();
+        } catch (err) {alert(err)}
     }
 
     render() {
